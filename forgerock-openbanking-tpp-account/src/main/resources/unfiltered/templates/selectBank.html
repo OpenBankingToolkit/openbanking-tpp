@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">ForgeRock Wealth - account home page</title>
+</head>
+<body>
+<div th:replace="fragments/header :: menu">Header</div>
+<!--/* Insert content fragment with content of the element with id = 'task-list' */-->
+<div id="content">
+    <div class="text-center">
+        <h1>ForgeAISP -Select your bank</h1>
+        <ul th:each="bank : ${banks}">
+            <li>
+                <a class="btn btn-primary" th:href="@{/initiateAccountRequest/{bankid}(bankid=${bank.id})}" role="button" th:text="${bank.name}"/>
+            </li>
+        </ul>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer">Footer</footer>
+</body>
+</html>

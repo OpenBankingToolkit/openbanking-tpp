@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">AISP Wealth manager - balances</title>
+</head>
+<body>
+<div th:replace="fragments/header :: account-menu">Header</div>
+<!--/* Insert content fragment with content of the element with id = 'task-list' */-->
+<div id="content">
+    <div class="text-center">
+        <h1>Balances</h1>
+        <div id="balances">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>Account ID</td>
+                    <td>Amount</td>
+                    <td>Credit or Debit</td>
+                    <td>Type</td>
+                    <td>Time</td>
+                    <td>Credit lines</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${balances.empty}">
+                    <td colspan="6">No balance</td>
+                </tr>
+                <tr th:each="balance : ${balances}">
+                    <td th:text="${balance.getAccountId()}"/>
+                    <td th:text="${balance.amount.getAmount()} + ' ' + ${balance.amount.getCurrency()}"/>
+                    <td th:text="${balance.getCreditDebitIndicator()}"/>
+                    <td th:text="${balance.getDateTime()}"/>
+                    <td th:text="${balance.getType()}"/>
+                    <td>
+                        <ul>
+                            <li th:each="creditLine : ${balance.getCreditLine()}">
+                                <ul>
+                                    <li>Included: <span th:text="${creditLine.getIncluded()}"/></li>
+                                    <li>Amount:
+                                        <span th:text="${creditLine.getAmount().getAmount()} + ' ' +  ${creditLine.getAmount().getCurrency()}"/>
+                                    </li>
+                                    <li>Type: <span th:text="${creditLine.getType()}"/></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer">Footer</footer>
+</body>
+</html>

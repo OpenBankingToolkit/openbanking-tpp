@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">ForgeRock Wealth - Home</title>
+</head>
+<body>
+<div th:replace="fragments/header :: menu">Header</div>
+<!--/* Insert content fragment with content of the element with id = 'task-list' */-->
+<div id="content">
+    <div class="text-center">
+        <img id="logo-homepage" th:src="@{/images/ForgeRock-logo-black.png}" alt="ForgeRock"/>
+
+        <h1>Welcome to AISP Wealth Manager!</h1>
+
+        <div class="lead">
+            This is an AISP demo application, part of the ForgeRock Open Banking Sandbox.
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footer :: footer">Footer</footer>
+
+</body>
+</html>

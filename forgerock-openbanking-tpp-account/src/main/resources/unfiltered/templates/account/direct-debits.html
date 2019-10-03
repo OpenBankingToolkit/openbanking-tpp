@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">AISP Wealth manager - Direct Debit</title>
+</head>
+<body>
+<div th:replace="fragments/header :: account-menu">Header</div>
+<!--/* Insert content fragment with content of the element with id = 'task-list' */-->
+<div id="content">
+    <div class="text-center">
+        <h1>Direct Debits</h1>
+        <div id="direct-debits">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>Account ID</td>
+                    <td>Direct Debit Id</td>
+                    <td>Mandate Identification</td>
+                    <td>Direct Debit Status Code</td>
+                    <td>Name</td>
+                    <td>Previous Payment Date Time</td>
+                    <td>Previous Payment Amount</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${directDebits.empty}">
+                    <td colspan="7">No direct debit</td>
+                </tr>
+                <tr th:each="directDebit : ${directDebits}">
+                    <td th:text="${directDebit.getAccountId()}"/>
+                    <td th:text="${directDebit.getDirectDebitId()}"/>
+                    <td th:text="${directDebit.getMandateIdentification()}"/>
+                    <td th:text="${directDebit.getDirectDebitStatusCode()}"/>
+                    <td th:text="${directDebit.getName()}"/>
+                    <td th:text="${directDebit.getPreviousPaymentDateTime()}"/>
+                    <td th:text="${directDebit.getPreviousPaymentAmount().getAmount()} + ' ' + ${directDebit.getPreviousPaymentAmount().getCurrency()}"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer">Footer</footer>
+</body>
+</html>

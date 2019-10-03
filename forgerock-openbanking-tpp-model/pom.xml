@@ -10,9 +10,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.forgerock.openbanking.tpp</groupId>
-    <artifactId>forgerock-openbanking-tpp-shop</artifactId>
+    <artifactId>forgerock-openbanking-tpp-model</artifactId>
     <packaging>jar</packaging>
-    <name>tpp-shop</name>
+    <name>tpp-model</name>
 
     <parent>
         <groupId>com.forgerock.openbanking.tpp</groupId>
@@ -28,10 +28,7 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
-        <dependency>
-            <groupId>com.forgerock.openbanking.tpp</groupId>
-            <artifactId>forgerock-openbanking-tpp-model</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.forgerock</groupId>
             <artifactId>spring-security-multi-auth-starter</artifactId>
@@ -80,41 +77,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build-info</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>ru.yaal.maven</groupId>
-                <artifactId>write-text-files-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources/unfiltered</directory>
-                <filtering>false</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources/filtered</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
 </project>

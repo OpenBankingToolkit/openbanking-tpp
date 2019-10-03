@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">AISP Wealth manager - Standing Orders</title>
+</head>
+<body>
+<div th:replace="fragments/header :: account-menu">Header</div>
+<!--/* Insert content fragment with content of the element with id = 'task-list' */-->
+<div id="content">
+    <div class="text-center">
+        <h1>Standing Orders</h1>
+        <div id="standing-orders">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>Account ID</td>
+                    <td>Standing Order Id</td>
+                    <td>Frequency</td>
+                    <td>Reference</td>
+                    <td>First Payment Date Time</td>
+                    <td>First Payment Amount</td>
+                    <td>Next Payment Date Time</td>
+                    <td>Next Payment Amount</td>
+                    <td>Final Payment Date Time</td>
+                    <td>Final Payment Amount</td>
+                    <td>Servicer</td>
+                    <td>Creditor Account</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${standingOrders.empty}">
+                    <td colspan="12">No standing order</td>
+                </tr>
+                <tr th:each="standingOrder : ${standingOrders}">
+                    <td th:text="${standingOrder.getAccountId()}"/>
+                    <td th:text="${standingOrder.getStandingOrderId()}"/>
+                    <td th:text="${standingOrder.getFrequency()}"/>
+                    <td th:text="${standingOrder.getReference()}"/>
+                    <td th:text="${standingOrder.getFirstPaymentDateTime()}"/>
+                    <td>
+                        <div th:if="${standingOrder.getFinalPaymentAmount()}">
+                            <span th:text="${standingOrder.getFirstPaymentAmount().getAmount()} + ' ' + ${standingOrder.getFirstPaymentAmount().getCurrency()}"/>
+                        </div>
+                    </td>
+                    <td th:text="${standingOrder.getNextPaymentDateTime()}"/>
+                    <td>
+                        <div th:if="${standingOrder.getNextPaymentAmount()}">
+                            <span th:text="${standingOrder.getNextPaymentAmount().getAmount()} + ' ' + ${standingOrder.getNextPaymentAmount().getCurrency()}"/>
+                        </div>
+                    </td>
+                    <td th:text="${standingOrder.getFinalPaymentDateTime()}"/>
+                    <td>
+                        <div th:if="${standingOrder.getFinalPaymentAmount()}">
+                             <span
+                                     th:text="${standingOrder.getFinalPaymentAmount().getAmount()} + ' ' + ${standingOrder.getFinalPaymentAmount().getCurrency()}"/>
+                        </div>
+                    </td>
+                    <td>
+                        <ul th:if="${standingOrder.getServicer()}">
+                            <li>Schema name: <span th:text="${standingOrder.getServicer().getSchemeName()}"/></li>
+                            <li>Identification:
+                                <span th:text="${standingOrder.getServicer().getIdentification()}"/>
+                            </li>
+                        </ul>
+                    </td>
+                    <td >
+                        <ul th:if="${standingOrder.getCreditorAccount()}">
+                            <li>Schema name: <span th:text="${standingOrder.getCreditorAccount().getSchemeName()}"/></li>
+                            <li>Identification:
+                                <span th:text="${standingOrder.getCreditorAccount().getIdentification()}"/></li>
+                            <li>Name: <span th:text="${standingOrder.getCreditorAccount().getName()}"/></li>
+                            <li>Secondary identification:
+                                <span th:text="${standingOrder.getCreditorAccount().getSecondaryIdentification()}"/>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer">Footer</footer>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">AISP Wealth manager - account home page</title>
+</head>
+<body>
+<div th:replace="fragments/header :: bank-menu">Header</div>
+<!--/* Insert content fragment with content of the element with id = 'task-list' */-->
+<div id="content">
+    <div class="text-center">
+        <h1>Accounts</h1>
+        <div id="accounts">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Currency</td>
+                    <td>Account</td>
+                    <td>Servicer</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${accounts.empty}">
+                    <td colspan="5">No account</td>
+                </tr>
+                <tr th:each="account : ${accounts}">
+                    <td>
+                        <a
+                           th:href="@{{path}/account/{accountId}/(path=${path.getPath()},accountId=${account.getAccountId()})}"
+                           th:text="${account.getNickname()} + ' /'"/>
+                    </td>
+                    <td th:text="${account.getCurrency()}"/>
+                    <td>
+                        <ul th:if="${account.getAccount()}">
+                            <li>
+                                Scheme Name: <span th:text="${account.getAccount().getSchemeName()}" />
+                            </li>
+                            <li>
+                                Identification: <span th:text="${account.getAccount().getIdentification()}" />
+                            </li>
+                            <li>
+                                Name: <span th:text="${account.getAccount().getName()}" />
+                            </li>
+                            <li>
+                                Secondary Identification: <span
+                                    th:text="${account.getAccount().getSecondaryIdentification()}" />
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul th:if="${account.getServicer()}">
+                            <li>
+                                Scheme Name: <span th:text="${account.getServicer().getSchemeName()}" />
+                            </li>
+                            <li>
+                                Identification: <span th:text="${account.getServicer().getIdentification()}" />
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer">Footer</footer>
+</body>
+</html>

@@ -1,0 +1,59 @@
+body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+.form-narrow {
+    max-width: 490px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+#main-logo {
+    margin: 2px;
+}
+
+#logo-homepage {
+    width: 200px;
+}
+
+#app-description {
+    color: #dedede;
+    width: 200px;
+    text-align: center;
+    float: right;
+}
+
+#content {
+    margin: 50px;
+}
+
+#accounts-list, #payments-list {
+    margin-top: 20px;
+}
+
+.navbar-inverse {
+    border-bottom: 10px solid #7ac142;
+}
+
+img.item {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+ul.paymentResponse {
+    list-style: none;
+}
+
+#toBookingDateTime, #fromBookingDateTime {
+    float: right;
+}

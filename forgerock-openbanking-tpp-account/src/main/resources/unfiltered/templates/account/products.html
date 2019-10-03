@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">AISP Wealth manager - Products</title>
+</head>
+<body>
+<div th:replace="fragments/header :: account-menu">Header</div>
+<!--/* Insert content fragment with content of the element with id = 'task-list' */-->
+<div id="content">
+    <div class="text-center">
+        <h1>Products</h1>
+        <div id="products">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>Account ID</td>
+                    <td>Product Identifier</td>
+                    <td>Product Type</td>
+                    <td>Product Name</td>
+                    <td>Secondary ProductIdentifier</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${products.empty}">
+                    <td colspan="5">No product</td>
+                </tr>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.getAccountId()}"/>
+                    <td th:text="${product.getProductIdentifier()}"/>
+                    <td th:text="${product.getProductType()}"/>
+                    <td th:text="${product.getProductName()}"/>
+                    <td th:text="${product.getSecondaryProductIdentifier()}"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer">Footer</footer>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">AISP Wealth manager - Transactions</title>
+</head>
+<body>
+<div th:replace="fragments/header :: account-menu">Header</div>
+<!--/* Insert content fragment with content of the element with id = 'task-list' */-->
+<div id="content">
+    <div class="text-center">
+        <h1>Transactions</h1>
+        <div id="transactions">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Filter transaction</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="#" th:action="@{{path}/transactions/(path=${path.getPath()})}" method="get">
+                        <div class="container">
+
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <label>From : </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <div id="fromBookingDateTime" class='input-group date datetimepicker'>
+                                    <input name="fromBookingDateTime" type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <label>To : </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <div id="toBookingDateTime"  class='input-group date datetimepicker'>
+                                    <input name="toBookingDateTime" type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-primary" type="submit">Filter</button>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('.datetimepicker').datetimepicker({
+                                format: 'YYYY-MM-DD-HH:mm:ss'
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>Account ID</td>
+                    <td>Transaction Id</td>
+                    <td>Transaction Reference</td>
+                    <td>Amount</td>
+                    <td>Credit Debit Indicator</td>
+                    <td>Status</td>
+                    <td>Booking Date Time</td>
+                    <td>Value Date Time</td>
+                    <td>Transaction Information</td>
+                    <td>Address Line</td>
+                    <td>Bank Transaction Code</td>
+                    <td>Proprietary Bank Transaction Code</td>
+                    <td>Balance</td>
+                    <td>Merchant Details</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${transactions.empty}">
+                    <td colspan="14">No transaction</td>
+                </tr>
+                <tr th:each="transaction : ${transactions}">
+                    <td th:text="${transaction.getAccountId()}"/>
+                    <td th:text="${transaction.getTransactionId()}"/>
+                    <td th:text="${transaction.getTransactionReference()}"/>
+                    <td>
+                        <span th:text="${transaction.getAmount().getAmount()} + ' ' + ${transaction.getAmount().getCurrency()}"/>
+                    </td>
+                    <td th:text="${transaction.getCreditDebitIndicator()}"/>
+                    <td th:text="${transaction.getStatus()}"/>
+                    <td th:text="${transaction.getBookingDateTime()}"/>
+                    <td th:text="${transaction.getValueDateTime()}"/>
+                    <td th:text="${transaction.getTransactionInformation()}"/>
+                    <td th:text="${transaction.getAddressLine()}"/>
+                    <td>
+                        <ul th:if="${transaction.getBankTransactionCode()}">
+                            <li>Code: <span th:text="${transaction.getBankTransactionCode().getCode()}"/></li>
+                            <li>Sub Code:
+                                <span th:text="${transaction.getBankTransactionCode().getSubCode()}"/>
+                            </li>
+                        </ul>
+                    </td>
+                    <td >
+                        <ul th:if="${transaction.getProprietaryBankTransactionCode()}">
+                            <li>Code: <span th:text="${transaction.getProprietaryBankTransactionCode().getCode()}"/></li>
+                            <li>Issuer:
+                                <span th:text="${transaction.getProprietaryBankTransactionCode().getIssuer()}"/>
+                            </li>
+                        </ul>
+                    </td>
+                    <td >
+                        <ul th:if="${transaction.getBalance()}">
+                            <li>Amount: <span
+                                    th:text="${transaction.getBalance().getAmount().getAmount()} + ' ' + ${transaction.getBalance().getAmount().getCurrency()}"/></li>
+                            <li>Credit debitor indicator:
+                                <span th:text="${transaction.getBalance().getCreditDebitIndicator()}"/>
+                            </li>
+                            <li>Type:
+                                <span th:text="${transaction.getBalance().getType()}"/>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul th:if="${transaction.getMerchantDetails()}">
+                            <li>Merchant Name: <span
+                                    th:text="${transaction.getMerchantDetails().getMerchantName()}"/></li>
+                            <li>Merchant Category Code:
+                                <span th:text="${transaction.getMerchantDetails().getMerchantCategoryCode()}"/>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer">Footer</footer>
+</body>
+</html>

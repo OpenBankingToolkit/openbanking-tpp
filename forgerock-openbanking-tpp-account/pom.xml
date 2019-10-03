@@ -22,6 +22,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.forgerock.openbanking.tpp</groupId>
+            <artifactId>forgerock-openbanking-tpp-model</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.forgerock.openbanking</groupId>
             <artifactId>forgerock-openbanking-ssl</artifactId>
         </dependency>

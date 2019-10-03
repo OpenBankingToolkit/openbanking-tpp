@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header :: headFragment">
+    <title id="pageTitle">AISP Wealth manager - Beneficiaries</title>
+</head>
+<body>
+<div th:replace="fragments/header :: account-menu">Header</div>
+<!--/* Insert content fragment with content of the element with id = 'task-list' */-->
+<div id="content">
+    <div class="text-center">
+        <h1>Beneficiaries</h1>
+        <div id="beneficiaries">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>Account ID</td>
+                    <td>Beneficiary Id</td>
+                    <td>Reference</td>
+                    <td>Servicer</td>
+                    <td>Creditor account</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${beneficiaries.empty}">
+                    <td colspan="5">No beneficiary</td>
+                </tr>
+                <tr th:each="beneficiary : ${beneficiaries}">
+                    <td th:text="${beneficiary.getAccountId()}"/>
+                    <td th:text="${beneficiary.getBeneficiaryId()}"/>
+                    <td th:text="${beneficiary.getReference()}"/>
+                    <td>
+                        <ul th:if="${beneficiary.getServicer()}">
+                            <li>Schema name: <span th:text="${beneficiary.getServicer().getSchemeName()}"/></li>
+                            <li>Identification:
+                                <span th:text="${beneficiary.getServicer().getIdentification()}"/>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul th:if="${beneficiary.getCreditorAccount()}">
+                            <li>Schema name: <span th:text="${beneficiary.getCreditorAccount().getSchemeName()}"/></li>
+                            <li>Identification:
+                                <span th:text="${beneficiary.getCreditorAccount().getIdentification()}"/></li>
+                            <li>Name: <span th:text="${beneficiary.getCreditorAccount().getName()}"/></li>
+                            <li>Secondary identification:
+                                <span th:text="${beneficiary.getCreditorAccount().getSecondaryIdentification()}"/>
+                            </li>
+
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer">Footer</footer>
+</body>
+</html>
