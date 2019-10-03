@@ -34,10 +34,6 @@
             <artifactId>forgerock-openbanking-upgrade</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.forgerock.openbanking.analytics</groupId>
-            <artifactId>forgerock-openbanking-analytics-client</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>

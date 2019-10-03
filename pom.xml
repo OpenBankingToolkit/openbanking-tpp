@@ -86,13 +86,8 @@
             </dependency>
 
             <dependency>
-                <groupId>com.forgerock.openbanking.analytics</groupId>
-                <artifactId>forgerock-openbanking-analytics-client</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.forgerock.openbanking.analytics</groupId>
-                <artifactId>forgerock-openbanking-analytics-core</artifactId>
+                <groupId>com.forgerock.openbanking.tpp</groupId>
+                <artifactId>forgerock-openbanking-tpp-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
