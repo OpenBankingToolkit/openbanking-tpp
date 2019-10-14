@@ -20,7 +20,7 @@
     <parent>
         <groupId>com.forgerock.openbanking</groupId>
         <artifactId>forgerock-openbanking-starter-parent</artifactId>
-        <version>1.0.31</version>
+        <version>1.0.34</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -32,12 +32,8 @@
 
     <properties>
         <ob-common.version>1.0.30</ob-common.version>
-        <spring-security-multi-auth-starter.version>0.0.15</spring-security-multi-auth-starter.version>
         <ob-auth.version>1.0.0</ob-auth.version>
         <ob-jwkms.version>1.1.10</ob-jwkms.version>
-
-        <mockito.version>3.0.0</mockito.version>
-        <asserts.version>3.13.2</asserts.version>
     </properties>
 
     <modules>
@@ -82,11 +78,6 @@
                 <version>${ob-common.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.forgerock</groupId>
-                <artifactId>spring-security-multi-auth-starter</artifactId>
-                <version>${spring-security-multi-auth-starter.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.forgerock.openbanking</groupId>
                 <artifactId>forgerock-openbanking-auth</artifactId>
                 <version>${ob-auth.version}</version>
@@ -95,18 +86,6 @@
                 <groupId>com.forgerock.openbanking.jwkms</groupId>
                 <artifactId>forgerock-openbanking-jwkms-embedded</artifactId>
                 <version>${ob-jwkms.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>${asserts.version}</version>
-                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
