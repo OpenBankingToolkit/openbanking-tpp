@@ -27,8 +27,8 @@ jobs:
       if: always()
       with:
         access-token: ${{ secrets.ACCESS_TOKEN }}
-        owner: forgecloud
-        repo: ob-tpp
+        owner: OpenBankingToolkit
+        repo: openbanking-tpp
     - name: Release
       uses: qcastel/github-actions-maven-release@master
       with:
@@ -48,5 +48,5 @@ jobs:
       if: always()
       with:
         access-token: ${{ secrets.ACCESS_TOKEN }}
-        owner: forgecloud
-        repo: ob-tpp
+        owner: OpenBankingToolkit
+        repo: openbanking-tpp
