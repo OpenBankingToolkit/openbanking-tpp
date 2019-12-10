@@ -94,6 +94,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": { "browserTarget": "tpp:build" }
         },
+        "test": { "builder": "@angular-builders/jest:run", "options": { "no-cache": true, "reporters": ["default"] } },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
