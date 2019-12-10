@@ -1,0 +1,108 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "tpp": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": { "skipTests": true },
+        "@schematics/angular:directive": { "skipTests": true },
+        "@schematics/angular:guard": { "skipTests": true },
+        "@schematics/angular:module": { "skipTests": true },
+        "@schematics/angular:pipe": { "skipTests": true },
+        "@schematics/angular:service": { "skipTests": true }
+      },
+      "root": "projects/tpp",
+      "sourceRoot": "projects/tpp/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "preserveSymlinks": true,
+            "outputPath": "dist/tpp",
+            "index": "projects/tpp/src/index.html",
+            "main": "projects/tpp/src/main.ts",
+            "polyfills": "projects/tpp/src/polyfills.ts",
+            "tsConfig": "projects/tpp/tsconfig.app.json",
+            "assets": ["projects/tpp/src/favicon.ico", "projects/tpp/src/assets"],
+            "styles": ["node_modules/cookieconsent/build/cookieconsent.min.css", "projects/tpp/src/styles.scss"],
+            "scripts": ["node_modules/cookieconsent/build/cookieconsent.min.js"],
+            "stylePreprocessorOptions": { "includePaths": ["utils/scss", "projects/tpp/src/scss"] },
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "forgerock": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/tpp/src/environments/environment.ts",
+                  "with": "projects/tpp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "statsJson": true,
+              "es5BrowserSupport": true
+            },
+            "ui-integ-native": {
+              "options": { "main": "projects/tpp/src/main-native.ts" },
+              "fileReplacements": [
+                {
+                  "replace": "projects/tpp/src/environments/environment.ts",
+                  "with": "projects/tpp/src/environments/environment.ui-integ.ts"
+                }
+              ]
+            },
+            "ui-integ": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/tpp/src/environments/environment.ts",
+                  "with": "projects/tpp/src/environments/environment.ui-integ.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "tpp:build",
+            "host": "tpp.dev-ob.forgerock.financial",
+            "ssl": true,
+            "port": 4207,
+            "sslCert": "ssl/all.dev-ob.forgerock.financial.crt",
+            "sslKey": "ssl/k-all.dev-ob.forgerock.financial.key",
+            "proxyConfig": "projects/tpp/proxy.conf.json"
+          },
+          "configurations": { "production": { "browserTarget": "tpp:build:production" } }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "tpp:build" }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["projects/tpp/tsconfig.app.json", "projects/tpp/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "forgerock-openbanking-ui"
+}

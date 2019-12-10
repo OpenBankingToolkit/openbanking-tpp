@@ -1,0 +1,21 @@
+FROM node:10
+
+WORKDIR /src
+ADD ./projects/tpp/server /src
+
+RUN npm ci
+ENV PORT 80
+RUN npm run build
+
+EXPOSE 80
+
+ENV DOMAIN ""
+ENV NODE_ENV "production"
+
+COPY projects/tpp/docker/start-server.sh /opt/start-server.sh
+COPY projects/tpp/docker/deployment-settings.js /src/dist/deployment-settings.js
+COPY projects/tpp/docker/ssl/bundled.perm /opt/bundled.perm
+
+ENV NODE_EXTRA_CA_CERTS /opt/bundled.perm
+
+CMD ["/opt/start-server.sh"]
