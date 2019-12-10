@@ -21,6 +21,7 @@
 package com.forgerock.openbanking.tpp.core.api.accounts;
 
 
+import com.forgerock.openbanking.am.services.AMResourceServerService;
 import com.forgerock.openbanking.constants.OpenBankingConstants;
 import com.forgerock.openbanking.jwt.exceptions.InvalidTokenException;
 import com.forgerock.openbanking.jwt.services.CryptoApiClient;
@@ -43,6 +44,7 @@ import com.forgerock.openbanking.tpp.exceptions.InvalidIdTokenException;
 import com.forgerock.openbanking.tpp.exceptions.InvalidStateException;
 import com.forgerock.openbanking.tpp.exceptions.RegistrationFailure;
 import com.nimbusds.jose.JOSEException;
+import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +96,8 @@ public class AccountRequestsController implements AccountRequests {
     private CookieService cookieService;
     @Autowired
     private RedirectService redirectService;
+    @Autowired
+    private AMResourceServerService amResourceServerService;
 
     /**
      * The initiate payment as defined by the OpenBanking standard.
@@ -206,7 +210,7 @@ public class AccountRequestsController implements AccountRequests {
 
             //Validate signatures
             LOGGER.debug("Validate the access token signature.", accessTokenResponse.access_token);
-            cryptoApiClient.verifyAccessToken(accessTokenResponse.getAccessTokenJWT().serialize());
+            amResourceServerService.verifyAccessToken(accessTokenResponse.getAccessTokenJWT().serialize());
 
             cookieService.addAISPContextCookie(response,
                     aispContextService.generateAISPContextJwt(aispContext, oidcState.getIntentId(),

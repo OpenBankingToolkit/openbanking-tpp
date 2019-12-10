@@ -222,7 +222,7 @@ public class AspspAPIController implements AspspAPI {
             requestParameterClaims.claim(entry.getKey(), entry.getValue());
         }
         requestParameterClaims.claim(OpenBankingConstants.RegistrationTppRequestClaims.SOFTWARE_STATEMENT, ssa.serialize());
-        return cryptoApiClient.signClaims(ssaClaims.getStringClaim(SOFTWARE_ID), requestParameterClaims.build());
+        return cryptoApiClient.signClaims(ssaClaims.getStringClaim(SOFTWARE_ID), requestParameterClaims.build(), false);
     }
 
     private SoftwareStatement getCurrentSoftwareStatement() {

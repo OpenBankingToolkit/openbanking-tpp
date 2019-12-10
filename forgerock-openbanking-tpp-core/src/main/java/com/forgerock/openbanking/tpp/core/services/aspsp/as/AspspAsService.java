@@ -182,7 +182,7 @@ public class AspspAsService {
         claims.put(OIDCClaim.USER_INFO, userInfoClaims);
         requestParameterClaims.claim(OIDCClaim.CLAIMS, claims);
         LOGGER.debug("Request parameter JWS : '{}'",
-                cryptoApiClient.signClaims(oidcRegistrationResponse.getClientId(), requestParameterClaims.build()));
+                cryptoApiClient.signClaims(oidcRegistrationResponse.getClientId(), requestParameterClaims.build(), false));
 
         return cryptoApiClient.signAndEncryptClaims(oidcRegistrationResponse.getClientId(),
                 requestParameterClaims.build(), aspspConfiguration.getOidcDiscoveryResponse().getJwksUri());
@@ -224,6 +224,6 @@ public class AspspAsService {
         requestParameterClaims.subject(clientId);
         requestParameterClaims.audience(aspspConfiguration.getOidcDiscoveryResponse().getIssuer());
         requestParameterClaims.expirationTime(new Date(new Date().getTime() + Duration.ofMinutes(10).toMillis()));
-        return cryptoApiClient.signClaims(clientId, requestParameterClaims.build());
+        return cryptoApiClient.signClaims(clientId, requestParameterClaims.build(), false);
     }
 }

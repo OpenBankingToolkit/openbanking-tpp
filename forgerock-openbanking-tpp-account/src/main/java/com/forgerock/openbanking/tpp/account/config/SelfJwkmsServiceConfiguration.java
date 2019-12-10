@@ -20,7 +20,7 @@
  */
 package com.forgerock.openbanking.tpp.account.config;
 
-import com.forgerock.openbanking.jwkms.service.JwkmsServiceConfiguration;
+import com.forgerock.openbanking.core.config.JwkmsServiceConfiguration;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
