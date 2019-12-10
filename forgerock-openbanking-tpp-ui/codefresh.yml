@@ -82,7 +82,7 @@ steps:
         stage: 'docker-ui'
         title: 'Build tpp node server docker image'
         image_name: obri/tpp-node
-        working-directory: ${{main_clone}}/forgerock-openbanking-directory-ui
+        working-directory: ${{main_clone}}/forgerock-openbanking-tpp-ui
         build_arguments:
           - BUILD_VERSION=${{BUILD_VERSION}}
         dockerfile: projects/tpp/docker/Dockerfile-server
@@ -92,7 +92,7 @@ steps:
         stage: 'docker-ui'
         title: 'Build tpp ui docker image'
         image_name: obri/tpp-ui
-        working-directory: ${{main_clone}}/forgerock-openbanking-directory-ui
+        working-directory: ${{main_clone}}/forgerock-openbanking-tpp-ui
         build_arguments:
           - BUILD_VERSION=${{BUILD_VERSION}}
         dockerfile: projects/tpp/docker/Dockerfile
