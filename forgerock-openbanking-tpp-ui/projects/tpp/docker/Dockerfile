@@ -1,6 +1,6 @@
 # Stage 1 - the build process
 FROM r.cfcr.io/openbanking/obri/build-tpp-ui as build-ui
-RUN npm run build.tpp.all
+RUN npm run build.tpp.themes
 
 # Stage 2 - the production environment
 FROM nginx:1.13.9-alpine
