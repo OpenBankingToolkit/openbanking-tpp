@@ -20,6 +20,7 @@
  */
 package com.forgerock.openbanking.tpp.core.api.payment;
 
+import com.forgerock.openbanking.am.services.AMResourceServerService;
 import com.forgerock.openbanking.constants.OpenBankingConstants;
 import com.forgerock.openbanking.jwt.exceptions.InvalidTokenException;
 import com.forgerock.openbanking.jwt.services.CryptoApiClient;
@@ -97,6 +98,8 @@ public class PaymentRequestsController implements PaymentRequests {
     private PaymentStatusRequestRepository paymentStatusRequestRepository;
     @Autowired
     private PaymentEventsRepository paymentEventsRepository;
+    @Autowired
+    private AMResourceServerService amResourceServerService;
 
     /**
      * The initiate payment as defined by the OpenBanking standard.
@@ -206,7 +209,7 @@ public class PaymentRequestsController implements PaymentRequests {
 
             //Validate signatures
             LOGGER.debug("Validate the access token signature {}.", accessTokenResponse.access_token);
-            cryptoApiClient.verifyAccessToken(accessTokenResponse.getAccessTokenJWT().serialize());
+            amResourceServerService.verifyAccessToken(accessTokenResponse.getAccessTokenJWT().serialize());
             Optional<FRPaymentSetup> paymentSetupOptional = paymentSetupRepository.findById(oidcState.getIntentId());
             if (!paymentSetupOptional.isPresent()) {
                 LOGGER.error("Invalid state: can't retrieve payment request from payment ID {}", oidcState.getIntentId());
