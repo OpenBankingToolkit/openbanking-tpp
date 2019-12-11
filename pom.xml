@@ -121,6 +121,14 @@
         <tag>HEAD</tag>
     </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray-openbankingtoolkit-OpenBankingToolkit</id>
+            <name>OpenBankingToolkit TPP</name>
+            <url>https://api.bintray.com/maven/openbanking-toolkit/OpenBankingToolKit/openbanking-tpp/;publish=1</url>
+        </repository>
+    </distributionManagement>
+
     <repositories>
         <repository>
             <id>jcenter</id>
