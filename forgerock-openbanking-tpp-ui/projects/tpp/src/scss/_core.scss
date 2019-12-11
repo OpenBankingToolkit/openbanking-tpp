@@ -1,0 +1,7 @@
+@import 'reset';
+@import 'normalize';
+@import 'mixins/breakpoints';
+
+@import '_create-theme';
+// Include non-theme styles for core.
+@include mat-core();
