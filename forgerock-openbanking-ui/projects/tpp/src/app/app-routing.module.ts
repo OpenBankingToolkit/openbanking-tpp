@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ForgerockGDPRService, ForegerockGDPRConsentGuard } from 'ob-ui-libs/gdpr';
-import { ForgerockSimpleLayoutModule, SimpleLayoutComponent } from 'ob-ui-libs/layouts/simple';
+import { ForgerockGDPRService, ForegerockGDPRConsentGuard } from '@forgerock/openbanking-ngx-common/gdpr';
+import { ForgerockSimpleLayoutModule, SimpleLayoutComponent } from '@forgerock/openbanking-ngx-common/layouts/simple';
 
 export const routes: Routes = [
   {

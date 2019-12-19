@@ -4,8 +4,8 @@
 @import 'mixins/theme';
 @import 'mixins/cssvars';
 
-@import '~ob-ui-libs/gdpr/main.scss';
-@import '~ob-ui-libs/components/main.scss';
+@import '~@forgerock/openbanking-ngx-common/gdpr/main.scss';
+@import '~@forgerock/openbanking-ngx-common/components/main.scss';
 
 @mixin foregrock-material-theme($theme) {
   // Including only the components that we use:

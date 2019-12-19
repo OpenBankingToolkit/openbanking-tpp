@@ -6,8 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ForgerockSharedModule } from 'ob-ui-libs/shared';
-import { ForgerockConfigService, ForgerockConfigModule } from 'ob-ui-libs/services/forgerock-config';
+import { ForgerockSharedModule } from '@forgerock/openbanking-ngx-common/shared';
+import { ForgerockConfigService, ForgerockConfigModule } from '@forgerock/openbanking-ngx-common/services/forgerock-config';
 import { AppComponent } from 'tpp/src/app/app.component';
 import { TranslateSharedModule } from 'tpp/src/app/translate-shared.module';
 // @ts-ignore
