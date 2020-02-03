@@ -3,22 +3,21 @@ module.exports = {
     version: 'BUILD_VERSION',
     template: 'TEMPLATE'
   },
-  tppAppAddress: 'https://tpp.DOMAIN',
-  bankAppAddress: 'https://bank.DOMAIN',
   CORSWhitelist: [
-    'https://tpp.DOMAIN',
+    'TPP_URL',
     'http://native.tpp.DOMAIN',
     'http://localhost',
     'capacitor://native.tpp.DOMAIN',
     'capacitor://localhost'
   ],
+  tppAppAddress: 'TPP_URL',
+  bankAppAddress: 'BANK_URL',
   cookieDomain: '.DOMAIN',
-  monitoringBackend: 'https://monitoring.DOMAIN',
-  nodeBackend: 'https://node.tpp.DOMAIN',
-  rsBackend: 'https://rs.aspsp.DOMAIN',
-  asBackend: 'https://as.aspsp.DOMAIN',
-  directoryBackend: 'https://matls.service.directory.DOMAIN',
-  jwkmsBackend: 'https://jwkms.DOMAIN',
-  matlsBackend: 'https://matls.as.aspsp.DOMAIN',
-  enableCustomization: 'ENABLE_CUSTOMIZATION'
+  monitoringBackend: 'MONITORING_BACKEND_URL',
+  nodeBackend: 'NODE_BACKEND_URL',
+  rsBackend: 'RS_BACKEND_URL',
+  asBackend: 'AUTHORIZATION_URL',
+  directoryBackend: 'DIRECTORY_BACKEND_URL',
+  jwkmsBackend: 'JWKMS_BACKEND_URL',
+  matlsBackend: 'MATLS_BACKEND_URL'
 };
