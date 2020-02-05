@@ -1,93 +1,73 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-
-import { catchError, finalize, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Input,
+  EventEmitter,
+  Output
+} from '@angular/core';
 import _get from 'lodash-es/get';
 
 import { ForgerockMessagesService } from '@forgerock/openbanking-ngx-common/services/forgerock-messages';
-import { TppNodeService } from '../../services/node.service';
+import { ShopItem } from 'tpp/src/store/models';
 
 @Component({
   selector: 'app-shop',
   template: `
-    <div fxLayout="column" fxLayoutAlign="center center">
-      <mat-spinner *ngIf="isRunning"></mat-spinner>
-      <button *ngIf="!isRunning" mat-raised-button color="accent" (click)="bankRedirection()">
-        Simulate Domestic Payement consent
-      </button>
+    <div fxLayoutGap="20px grid" fxLayout="column" fxLayout.gt-xs="row wrap">
+      <div *ngFor="let item of items" fxFlex fxFlex.gt-xs="50" fxFlex.gt-sm="33" fxFlex.gt-md="25">
+        <mat-card fxLayout="column">
+          <mat-card-header>
+            <mat-card-title>{{ item.title }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image [src]="item.img" alt="Dress image" />
+          <mat-card-content>
+            <p>
+              {{ item.description }}
+            </p>
+          </mat-card-content>
+          <span fxFlex></span>
+          <mat-card-actions>
+            <span fxFlex>{{ item.price | currency: 'GBP' }}</span>
+            <button
+              [disabled]="selected.includes(item.id)"
+              mat-raised-button
+              color="primary"
+              (click)="select.emit(item.id)"
+            >
+              <mat-icon>add_shopping_cart</mat-icon> Add to cart
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
   `,
   styles: [
     `
-      :host > div {
+      :host {
+        display: block;
         height: 100%;
+        width: 100%;
+      }
+
+      mat-card {
+        height: 100%;
+      }
+
+      mat-card img {
+        max-width: initial !important;
       }
     `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TppShopComponent implements OnInit {
-  isRunning = false;
-  constructor(
-    private nodeService: TppNodeService,
-    private messages: ForgerockMessagesService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  @Input() items: ShopItem[];
+  @Input() selected: number[];
+  @Output() select = new EventEmitter<string>();
+
+  constructor(private messages: ForgerockMessagesService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {}
-
-  bankRedirection() {
-    console.log('this.isRunning', this.isRunning);
-    this.isRunning = true;
-    this.nodeService
-      .getRestDomesticPayementRedirection()
-      .pipe(
-        tap(({ redirection }) => {
-          window.location.href = redirection;
-        }),
-        catchError((er: HttpErrorResponse | Error) => {
-          console.log('catchError', er);
-          console.log('this.isRunning', this.isRunning);
-          const error = _get(er, 'error.error') || er;
-          this.messages.error(error);
-          return of(er);
-        }),
-        finalize(() => {
-          console.log('finalize');
-          console.log('this.isRunning', this.isRunning);
-          this.isRunning = false;
-          this.cdr.detectChanges();
-        })
-      )
-      .subscribe();
-    console.log('this.isRunning', this.isRunning);
-  }
-
-  amRedirection() {
-    console.log('this.isRunning', this.isRunning);
-    this.isRunning = true;
-    this.nodeService
-      .getDomesticPayementRedirection()
-      .pipe(
-        tap(({ redirection }) => {
-          window.location.href = redirection;
-        }),
-        catchError((er: HttpErrorResponse | Error) => {
-          console.log('catchError', er);
-          console.log('this.isRunning', this.isRunning);
-          const error = _get(er, 'error.error') || er;
-          this.messages.error(error);
-          return of(er);
-        }),
-        finalize(() => {
-          console.log('finalize');
-          console.log('this.isRunning', this.isRunning);
-          this.isRunning = false;
-          this.cdr.detectChanges();
-        })
-      )
-      .subscribe();
-    console.log('this.isRunning', this.isRunning);
-  }
 }
