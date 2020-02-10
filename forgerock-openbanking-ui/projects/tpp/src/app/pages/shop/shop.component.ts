@@ -1,15 +1,6 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Input,
-  EventEmitter,
-  Output
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import _get from 'lodash-es/get';
 
-import { ForgerockMessagesService } from '@forgerock/openbanking-ngx-common/services/forgerock-messages';
 import { ShopItem } from 'tpp/src/store/models';
 
 @Component({
@@ -67,7 +58,7 @@ export class TppShopComponent implements OnInit {
   @Input() selected: number[];
   @Output() select = new EventEmitter<string>();
 
-  constructor(private messages: ForgerockMessagesService, private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit() {}
 }

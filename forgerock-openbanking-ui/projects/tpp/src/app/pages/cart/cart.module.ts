@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatProgressSpinnerModule, MatButtonModule, MatProgressBarModule } from '@angular/material';
+import {  MatButtonModule, MatProgressBarModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { ForgerockAlertModule } from '@forgerock/openbanking-ngx-common/components/forgerock-alert';
 import { ForgerockCustomerIconModule } from '@forgerock/openbanking-ngx-common/components/forgerock-customer-icon';
