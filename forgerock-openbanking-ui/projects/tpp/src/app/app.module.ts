@@ -7,14 +7,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ForgerockSharedModule } from '@forgerock/openbanking-ngx-common/shared';
-import { ForgerockConfigService, ForgerockConfigModule } from '@forgerock/openbanking-ngx-common/services/forgerock-config';
+import {
+  ForgerockConfigService,
+  ForgerockConfigModule
+} from '@forgerock/openbanking-ngx-common/services/forgerock-config';
 import { AppComponent } from 'tpp/src/app/app.component';
 import { TranslateSharedModule } from 'tpp/src/app/translate-shared.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
 // @ts-ignore
 import cssVars from 'tpp/src/scss/cssvars.scss';
 import { AppRoutingModule } from 'tpp/src/app/app-routing.module';
 import { environment } from 'tpp/src/environments/environment';
 import rootReducer from 'tpp/src/store';
+import { ShopSignModule } from './components/shop-sign/shop-sign.module';
+import { ShopToolbarModule } from './components/shop-toolbar/shop-toolbar.module';
+import { ShopMenuModule } from './components/shop-menu/shop-menu.module';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<{}>>('Registered Reducers');
 
@@ -41,6 +48,10 @@ export function init_app(appConfig: ForgerockConfigService) {
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    MatSidenavModule,
+    ShopSignModule,
+    ShopToolbarModule,
+    ShopMenuModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -49,7 +60,8 @@ export function init_app(appConfig: ForgerockConfigService) {
       }
     }),
     // Store
-    StoreModule.forRoot(REDUCER_TOKEN)
+    StoreModule.forRoot(REDUCER_TOKEN),
+    environment.devModules || []
   ],
   providers: [
     {
