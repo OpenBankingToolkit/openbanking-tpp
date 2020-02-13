@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 
 import { IState } from 'tpp/src/store/models';
