@@ -12,7 +12,7 @@ import { ShopItem } from 'tpp/src/store/models';
           <mat-card-header>
             <mat-card-title>{{ item.title }}</mat-card-title>
           </mat-card-header>
-          <img mat-card-image [src]="item.img" alt="Dress image" />
+          <img loading="lazy" mat-card-image [src]="item.img" alt="Dress image" />
           <mat-card-content>
             <p>
               {{ item.description }}

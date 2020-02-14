@@ -4,7 +4,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { TppSuccessRoutingModule } from './success-routing.module';
 import { TppSuccessComponent } from './success.component';
-import { MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ForgerockAlertModule } from '@forgerock/openbanking-ngx-common/components/forgerock-alert';
 
 @NgModule({

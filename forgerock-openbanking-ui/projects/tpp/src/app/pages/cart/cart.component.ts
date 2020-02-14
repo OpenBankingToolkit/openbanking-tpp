@@ -31,7 +31,7 @@ import { ShopItem } from 'tpp/src/store/models';
           <ng-container matColumnDef="img">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <img mat-card-image [src]="element.img" alt="Dress image" />
+              <img loading="lazy" mat-card-image [src]="element.img" alt="Dress image" />
             </td>
             <td mat-footer-cell *matFooterCellDef>Total</td>
           </ng-container>
