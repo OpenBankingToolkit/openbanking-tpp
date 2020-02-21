@@ -1,0 +1,12 @@
+{
+    "data": {
+        "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+        "currentBalance": "854.12",
+        "availableBalance": "854.12",
+        "currency": "GBP"
+    },
+    "links": {
+        "self": "https://matls.rs.aspsp.cdr.forgerock.financial/banking/accounts/4e5f7e77-ce29-4eb2-acb4-0609eae01c13/balance"
+    },
+    "meta": {}
+}

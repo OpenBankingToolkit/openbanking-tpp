@@ -19,7 +19,10 @@
     "build.tpp.themes": "openbanking-ui-cli buildThemes --project tpp",
     "=================CLUSTER UI-INTEG=================": "",
     "serve.ui-integ.tpp": "run-p serve.ui-integ.tpp.client serve.tpp.server",
-    "serve.ui-integ.tpp.client": "ng serve tpp --host dev.tpp.ui-integ.forgerock.financial --browserTarget tpp:build:ui-integ --sslCert ssl/all.ui-integ.forgerock.financial.crt --sslKey ssl/k-all.ui-integ.forgerock.financial.key"
+    "serve.ui-integ.tpp.client": "ng serve tpp --host dev.tpp.ui-integ.forgerock.financial --browserTarget tpp:build:ui-integ --sslCert ssl/all.ui-integ.forgerock.financial.crt --sslKey ssl/k-all.ui-integ.forgerock.financial.key",
+    "=================CLUSTER CDR=================": "",
+    "serve.cdr.tpp": "run-p serve.cdr.tpp.client serve.tpp.server",
+    "serve.cdr.tpp.client": "ng serve cdr-tpp --host dev.cdr-tpp.cdr.forgerock.financial --browserTarget cdr-tpp:build:cdr --sslCert ssl/wildcard.cdr.forgerock.financial.crt --sslKey ssl/k-wildcard.cdr.forgerock.financial.key"
   },
   "private": true,
   "dependencies": {
