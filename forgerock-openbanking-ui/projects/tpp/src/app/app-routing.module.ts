@@ -23,7 +23,17 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
+        loadChildren: () => import('tpp/src/app/pages/home/home.module').then(m => m.HomeModule)
+      },
+      {
+        path: 'shop',
+        pathMatch: 'full',
         loadChildren: () => import('tpp/src/app/pages/shop/shop.module').then(m => m.TppShopModule)
+      },
+      {
+        path: 'cart',
+        pathMatch: 'full',
+        loadChildren: () => import('tpp/src/app/pages/cart/cart.module').then(m => m.CartModule)
       },
       {
         path: 'success',

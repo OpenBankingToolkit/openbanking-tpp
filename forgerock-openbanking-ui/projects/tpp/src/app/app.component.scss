@@ -1,0 +1,52 @@
+@import 'mixins/breakpoints';
+
+:host {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+
+  mat-sidenav-container {
+    width: 100%;
+  }
+
+  mat-sidenav {
+    width: 250px;
+    padding: 0.5em;
+    overflow: initial;
+  }
+  mat-sidenav-content {
+    overflow: hidden;
+  }
+
+  ::ng-deep mat-sidenav-content > *:last-child {
+    display: block;
+    flex: 1 0 auto;
+    width: 100%;
+    min-width: 100%;
+    overflow: auto;
+    height: calc(100% - 56px);
+
+    @include media-breakpoint-up('md') {
+      padding: 30px;
+    }
+    @include media-breakpoint-down('md') {
+      padding: 20px;
+    }
+    @include media-breakpoint-down('sm') {
+      padding: 10px;
+    }
+    @include media-breakpoint-down('xs') {
+      padding: 10px;
+    }
+  }
+
+  ::ng-deep mat-sidenav-content.desktop > *:last-child {
+    height: calc(100% - 64px);
+  }
+
+  ::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
