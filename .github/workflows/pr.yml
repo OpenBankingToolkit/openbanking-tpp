@@ -18,7 +18,7 @@ jobs:
           ${{ runner.os }}-maven-
 
     - name: Check Copyright
-      run: mvn licence:check
+      run: mvn license:check
 
     - name: Build and Test
       run: mvn clean install
