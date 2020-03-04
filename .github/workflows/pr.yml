@@ -8,8 +8,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-      
-    - name: Check Copyright	
+
+    - uses: actions/cache@v1
+      with:
+        path: /root/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    - name: Check Copyright
       uses: qcastel/github-actions-maven-cmd@master
       with:
         maven-args: "license:check"
