@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v1
+
     - uses: actions/cache@v1
       with:
         path: ~/.m2/repository
@@ -14,9 +16,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-    - uses: actions/checkout@v1
-      
-    - name: Check Copyright	
+    - name: Check Copyright
       uses: qcastel/github-actions-maven-cmd@master
       with:
         maven-args: "license:check"
