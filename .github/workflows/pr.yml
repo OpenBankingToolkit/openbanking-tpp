@@ -7,24 +7,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-
-    - uses: actions/cache@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v1
       with:
-        path: /root/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        java-version: '11'
+        architecture: x64
+
+    - name: Cache Maven packages
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven2-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
 
     - name: Check Copyright
-      uses: qcastel/github-actions-maven-cmd@master
-      with:
-        maven-args: "license:check"
+      run: mvn license:check
 
-    - name: Build and Test	
-      uses: qcastel/github-actions-maven-cmd@master
-      with:
-        maven-args: "clean install"
+    - name: Build and Test
+      run: mvn clean install
 
     - uses: codecov/codecov-action@v1
       with:
