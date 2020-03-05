@@ -121,12 +121,25 @@
         <tag>forgerock-openbanking-reference-implementation-tpp-1.0.21</tag>
     </scm>
 
+<!--    <distributionManagement>-->
+<!--        <repository>-->
+<!--            <id>bintray-openbankingtoolkit-OpenBankingToolkit</id>-->
+<!--            <name>OpenBankingToolkit TPP</name>-->
+<!--            <url>https://api.bintray.com/maven/openbanking-toolkit/OpenBankingToolKit/openbanking-tpp/;publish=1</url>-->
+<!--        </repository>-->
+<!--    </distributionManagement>-->
+
     <distributionManagement>
         <repository>
-            <id>bintray-openbankingtoolkit-OpenBankingToolkit</id>
-            <name>OpenBankingToolkit TPP</name>
-            <url>https://api.bintray.com/maven/openbanking-toolkit/OpenBankingToolKit/openbanking-tpp/;publish=1</url>
+            <id>central</id>
+            <name>maven.forgerock.org-releases</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
         </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>maven.forgerock.org-snapshots</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <repositories>

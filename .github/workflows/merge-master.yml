@@ -12,12 +12,11 @@ jobs:
     steps:
 
       - uses: actions/checkout@v1
+
       - uses: actions/cache@v1
         with:
-          path: ~/.m2/repository
+          path: /root/.m2/repository
           key: ${{ runner.os }}-maven-mm-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
 
       - name: Create Package
         uses: benjefferies/create-bintray-package@master

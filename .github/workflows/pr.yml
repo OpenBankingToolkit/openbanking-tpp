@@ -18,8 +18,6 @@ jobs:
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
 
     - name: Check Copyright
       run: mvn license:check
