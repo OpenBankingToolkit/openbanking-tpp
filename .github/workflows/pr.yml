@@ -13,6 +13,9 @@ jobs:
         java-version: '11'
         architecture: x64
 
+    - name: Find local mvn repo
+      run: mvn help:evaluate -Dexpression=settings.localRepository | grep -v '\[INFO\]'
+
     - name: Cache Maven packages
       uses: actions/cache@v1
       with:
