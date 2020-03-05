@@ -15,19 +15,9 @@ jobs:
       - uses: actions/cache@v1
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-mm-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-
-      - name: Check Copyright
-        uses: qcastel/github-actions-maven-cmd@master
-        with:
-          maven-args: "license:check"
-
-      - name: Build and Test
-        uses: qcastel/github-actions-maven-cmd@master
-        with:
-          maven-args: "verify"
 
       - name: Create Package
         uses: benjefferies/create-bintray-package@master
@@ -57,7 +47,7 @@ jobs:
           gpg-key-id: ${{ secrets.GITHUB_GPG_KEY_ID }}
           gpg-key: ${{ secrets.GITHUB_GPG_KEY }}
 
-          maven-args: "-Dmaven.javadoc.skip=true -Ddockerfile.skip -DskipITs -DdockerCompose.skip"
+          maven-args: "-Dmaven.javadoc.skip=true -DskipTests -Ddockerfile.skip -DskipITs -DdockerCompose.skip"
           maven-repo-server-id: bintray-openbankingtoolkit-OpenBankingToolkit
           maven-repo-server-username: openbankingtoolkit
           maven-repo-server-password: ${{ secrets.BINTRAY_API_KEY }}
