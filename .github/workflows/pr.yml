@@ -13,18 +13,11 @@ jobs:
         java-version: '11'
         architecture: x64
 
-    - name: Find local mvn repo
-      run: mvn help:evaluate -Dexpression=settings.localRepository | grep -v '\[INFO\]'
-    - name: Find home mvn repo
-      run: echo ~/.m2/repository
-
     - name: Cache Maven packages
       uses: actions/cache@v1
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
 
     - name: Check Copyright
       run: mvn license:check
