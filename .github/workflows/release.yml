@@ -18,13 +18,7 @@ jobs:
           server-password: MAVEN_PASSWORD
 
       - name: Pre-release package
-        run: mvn -Dusername=$GITHUB_ACCESS_TOKEN release:prepare -B -Darguments="$MAVEN_ARGS"
-        env:
-          MAVEN_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.ARTIFACTORY_TOKEN }}
-
-      - name: Release package
-        run: mvn release:perform -B -Darguments="$MAVEN_ARGS
+        run:  mvn -B deploy
         env:
           MAVEN_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.ARTIFACTORY_TOKEN }}
