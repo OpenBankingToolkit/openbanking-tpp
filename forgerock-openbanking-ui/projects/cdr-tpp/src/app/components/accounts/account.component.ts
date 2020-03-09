@@ -1,15 +1,19 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { IAccount, ProductCategory } from 'cdr-tpp/src/models';
-import { switchAll } from 'rxjs/operators';
+import { ProductCategory, IUIAccount } from 'cdr-tpp/src/models';
 
 @Component({
   selector: 'app-account',
   template: `
-    <mat-card [routerLink]="'/accounts/' + account.accountId">
+    <mat-card [routerLink]="'/accounts/' + account.bankId + '/' + account.accountId">
       <!-- <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar> -->
 
       <mat-card-content fxLayout="row" fxLayoutAlign="space-between center">
+        <div
+          *ngIf="account.bank"
+          class="bank-logo"
+          [ngStyle]="{ backgroundImage: getImageSrc(account.bank.logo) }"
+        ></div>
         <div fxFlex class="title-wrapper">
           <div class="title">{{ account.displayName }} - {{ getProductCategory(account.productCategory) }}</div>
           <div class="account-id">{{ account.accountId }}</div>
@@ -31,6 +35,15 @@ import { switchAll } from 'rxjs/operators';
       mat-card {
         display: block;
         width: 100%;
+      }
+      .bank-logo {
+        height: 70px;
+        width: 70px;
+        margin: 0;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-right: 1em;
       }
       .title-wrapper {
         margin-right: 1em;
@@ -54,11 +67,15 @@ import { switchAll } from 'rxjs/operators';
 })
 export class AccountComponent implements OnInit {
   @Input() loading: boolean;
-  @Input() account: IAccount;
+  @Input() account: IUIAccount;
 
   constructor() {}
 
   ngOnInit() {}
+
+  public getImageSrc(logo) {
+    return `url("${logo}")`;
+  }
 
   getProductCategory(category: ProductCategory) {
     switch (category) {

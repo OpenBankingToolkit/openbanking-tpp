@@ -1,0 +1,16 @@
+FROM node:10
+
+ADD ./projects/cdr-tpp/server /src
+
+WORKDIR /src
+
+ARG MONGO_HOST
+ARG MONGO_DB
+ENV MONGO_HOST ${MONGO_HOST}
+ENV MONGO_DB ${MONGO_DB}
+
+RUN npm ci
+
+CMD npm start
+
+

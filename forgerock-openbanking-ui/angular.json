@@ -140,13 +140,7 @@
             "es5BrowserSupport": true
           },
           "configurations": {
-            "forgerock": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/cdr-tpp/src/environments/environment.ts",
-                  "with": "projects/cdr-tpp/src/environments/environment.prod.ts"
-                }
-              ],
+            "production": {
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -156,8 +150,15 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "statsJson": true,
-              "es5BrowserSupport": true
+              "budgets": [{ "type": "initial", "maximumWarning": "2mb", "maximumError": "5mb" }]
+            },
+            "compose": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/cdr-tpp/src/environments/environment.ts",
+                  "with": "projects/cdr-tpp/src/environments/environment.compose.ts"
+                }
+              ]
             },
             "cdr": {
               "fileReplacements": [

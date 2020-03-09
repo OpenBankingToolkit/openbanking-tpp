@@ -29,7 +29,7 @@
   @include mat-icon-theme($theme);
   @include mat-input-theme($theme);
   // @include mat-list-theme($theme);
-  // @include mat-menu-theme($theme);
+  @include mat-menu-theme($theme);
   // @include mat-paginator-theme($theme);
   @include mat-progress-bar-theme($theme);
   @include mat-progress-spinner-theme($theme);

@@ -12,7 +12,7 @@ import { ForgerockSplashscreenService } from '@forgerock/openbanking-ngx-common/
   template: `
     <mat-sidenav-container>
       <mat-sidenav #snav [fixedInViewport]="mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'push'">
-        <app-shop-sign [sidenavRef]="snav"></app-shop-sign><app-shop-menu [sidenavRef]="snav"></app-shop-menu
+        <!-- <app-shop-sign [sidenavRef]="snav"></app-shop-sign><app-shop-menu [sidenavRef]="snav"></app-shop-menu -->
       ></mat-sidenav>
       <mat-sidenav-content [class]="mobileQuery.matches ? 'mobile' : 'desktop'">
         <app-shop-toolbar-container [sidenavRef]="snav"></app-shop-toolbar-container>

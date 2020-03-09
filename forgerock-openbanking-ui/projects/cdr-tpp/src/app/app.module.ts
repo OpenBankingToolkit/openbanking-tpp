@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, InjectionToken, APP_INITIALIZER } from '@angular/core';
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -15,6 +15,10 @@ import {
 import { AppComponent } from 'cdr-tpp/src/app/app.component';
 import { TranslateSharedModule } from 'cdr-tpp/src/app/translate-shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { CookieModule } from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
 
 import { AppRoutingModule } from 'cdr-tpp/src/app/app-routing.module';
 import { environment } from 'cdr-tpp/src/environments/environment';
@@ -23,6 +27,8 @@ import { RootEffects } from 'cdr-tpp/src/store/effects';
 import { ShopSignModule } from './components/shop-sign/shop-sign.module';
 import { ShopToolbarModule } from './components/shop-toolbar/shop-toolbar.module';
 import { ShopMenuModule } from './components/shop-menu/shop-menu.module';
+import { HasTokenGuard } from './guards/hasToken';
+import { AuthInterceptor } from './interceptors/auth';
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<{}>>('Registered Reducers');
 
@@ -36,6 +42,10 @@ export function createTranslateLoader(http: HttpClient) {
 
 export function init_app(appConfig: ForgerockConfigService) {
   return () => appConfig.fetchAndMerge(environment);
+}
+
+export function playerFactory() {
+  return player;
 }
 
 @NgModule({
@@ -60,10 +70,12 @@ export function init_app(appConfig: ForgerockConfigService) {
         deps: [HttpClient]
       }
     }),
+    CookieModule.forRoot(),
     // Store
     StoreModule.forRoot(REDUCER_TOKEN),
     EffectsModule.forRoot(RootEffects),
-    environment.devModules || []
+    environment.devModules || [],
+    LottieModule.forRoot({ player: playerFactory })
   ],
   providers: [
     {
@@ -75,6 +87,13 @@ export function init_app(appConfig: ForgerockConfigService) {
       provide: APP_INITIALIZER,
       useFactory: init_app,
       deps: [ForgerockConfigService],
+      multi: true
+    },
+    CookieService,
+    HasTokenGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
       multi: true
     }
   ],

@@ -7,13 +7,15 @@ import { IState, IUIAccount, ITransaction } from 'cdr-tpp/src/models';
 import {
   selectAccountSelector,
   GetAccountsRequestAction,
-  selectLoadingAccounts
+  selectLoadingAccounts,
+  selectAccountsError
 } from 'cdr-tpp/src/store/reducers/accounts';
 import { first } from 'rxjs/operators';
 import {
   selectTransactionsSelector,
   selectIsLoading,
-  GetTransactionsRequestAction
+  GetTransactionsRequestAction,
+  selectError as selectTransactionsError
 } from 'cdr-tpp/src/store/reducers/transactions';
 
 @Component({
@@ -22,6 +24,7 @@ import {
     <app-transactions
       [isLoading]="isLoading$ | async"
       [account]="account$ | async"
+      [error]="error$ | async"
       [transactions]="transactions$ | async"
     ></app-transactions>
   `
@@ -42,6 +45,11 @@ export class TransactionsContainer implements OnInit {
     this.isTransactionsLoading$,
     (isAccountsLoading: boolean, isTransactionsLoading: boolean) => isAccountsLoading || isTransactionsLoading
   );
+  public error$: Observable<string> = combineLatest(
+    this.store.pipe(select(selectAccountsError)),
+    this.store.pipe(select(selectTransactionsError)),
+    (accountError: string, transactionError: string) => accountError || transactionError || ''
+  );
 
   constructor(private activatedRoute: ActivatedRoute, private store: Store<IState>) {}
 
@@ -52,6 +60,7 @@ export class TransactionsContainer implements OnInit {
         !!!data &&
         this.store.dispatch(
           new GetTransactionsRequestAction({
+            bankId: this.activatedRoute.snapshot.params.bankId,
             accountId: this.activatedRoute.snapshot.params.accountId
           })
         )

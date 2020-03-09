@@ -40,7 +40,7 @@ const appToolbarHeight = 56;
           ></app-account>
         </div>
 
-        <div *ngIf="!isLoading && transactions; else unknown" [@ngForStagger]="transactions.length">
+        <div *ngIf="!isLoading && transactions" [@ngForStagger]="transactions.length">
           <app-transaction
             [transaction]="transaction"
             *ngFor="let transaction of transactions"
@@ -50,6 +50,7 @@ const appToolbarHeight = 56;
         <forgerock-alert *ngIf="transactions !== null && !transactions.length" color="accent"
           >You do not have any transactions yet</forgerock-alert
         >
+        <forgerock-alert *ngIf="error" color="warn">{{ error }}</forgerock-alert>
       </div>
     </div>
   `,
@@ -89,6 +90,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   @Input() isLoading: boolean;
   @Input() account: IUIAccount;
+  @Input() error: string;
   @Input() transactions: ITransaction[];
   @ViewChild('accountElement') accountElement: ElementRef;
 

@@ -8,18 +8,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BanksRoutingModule } from './banks-routing.module';
 import { BanksComponent } from './banks.component';
 import { RouterModule } from '@angular/router';
+import { BanksModule } from '../../components/banks/banks.module';
 
 @NgModule({
   declarations: [BanksComponent],
   imports: [
     CommonModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
     RouterModule,
-    ReactiveFormsModule,
-    BanksRoutingModule
+    BanksRoutingModule,
+    BanksModule
   ]
 })
 export class BanksPageModule {}

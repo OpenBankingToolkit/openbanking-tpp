@@ -23,21 +23,20 @@ export class TransactionsEffects {
   requestAccounts$: Observable<Action> = this.actions$.pipe(
     ofType(types.TRANSACTIONS_REQUEST),
     mergeMap((action: GetTransactionsRequestAction) => {
-      const { accountId } = action.payload;
-      return this.cdrService.getTransactions(accountId).pipe(
-        delay(2000), // remove when prod
+      const { bankId, accountId } = action.payload;
+      return this.cdrService.getTransactions(bankId, accountId).pipe(
         map(
           response =>
             new GetTransactionsSuccessAction({
               accountId,
-              transactions: response.data.transactions
+              transactions: response.transactions
             })
         ),
         catchError((er: HttpErrorResponse) => {
           const error = _get(er, 'error.Message') || _get(er, 'error.message') || _get(er, 'message') || er;
           this.message.error(error);
           console.error(error);
-          return of(new GetTransactionsErrorAction({ accountId }));
+          return of(new GetTransactionsErrorAction({ accountId, error }));
         })
       );
     })

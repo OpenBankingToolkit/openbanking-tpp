@@ -7,7 +7,8 @@ import {
   selectLoadingAccounts,
   selectAccountsSelector,
   GetAccountsRequestAction,
-  selectLoadingBalances
+  selectLoadingBalances,
+  selectAccountsError
 } from 'cdr-tpp/src/store/reducers/accounts';
 import { first, filter } from 'rxjs/operators';
 
@@ -18,6 +19,7 @@ import { first, filter } from 'rxjs/operators';
       [isAccountsLoading]="isAccountsLoading$ | async"
       [isBalancesLoading]="isBalancesLoading$ | async"
       [accounts]="accounts$ | async"
+      [error]="error$ | async"
     ></app-accounts>
   `
 })
@@ -25,6 +27,7 @@ export class AccountsContainer implements OnInit {
   public isAccountsLoading$: Observable<boolean> = this.store.pipe(select(selectLoadingAccounts));
   public isBalancesLoading$: Observable<boolean> = this.store.pipe(select(selectLoadingBalances));
   public accounts$: Observable<IUIAccount[]> = this.store.pipe(select(selectAccountsSelector));
+  public error$: Observable<string> = this.store.pipe(select(selectAccountsError));
 
   constructor(private store: Store<IState>) {}
 

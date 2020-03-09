@@ -21,6 +21,7 @@ import { ngForStagger } from '../animations';
         <forgerock-alert *ngIf="accounts !== null && !accounts.length" color="accent"
           >You do not have any accounts yet</forgerock-alert
         >
+        <forgerock-alert *ngIf="error" color="warn">{{ error }}</forgerock-alert>
       </div>
     </div>
   `,
@@ -46,6 +47,7 @@ export class AccountsComponent implements OnInit {
   @Input() isAccountsLoading: boolean;
   @Input() isBalancesLoading: boolean;
   @Input() accounts: IUIAccount[];
+  @Input() error: string;
 
   constructor() {}
 

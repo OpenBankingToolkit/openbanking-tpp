@@ -11,7 +11,7 @@ export enum types {
 
 export class GetTransactionsRequestAction implements Action {
   readonly type = types.TRANSACTIONS_REQUEST;
-  constructor(public payload: { accountId: string }) {}
+  constructor(public payload: { bankId: string; accountId: string }) {}
 }
 
 export class GetTransactionsSuccessAction implements Action {
@@ -21,12 +21,13 @@ export class GetTransactionsSuccessAction implements Action {
 
 export class GetTransactionsErrorAction implements Action {
   readonly type = types.TRANSACTIONS_ERROR;
-  constructor(public payload: { accountId: string }) {}
+  constructor(public payload: { accountId: string; error: string }) {}
 }
 
 export type ActionsUnion = GetTransactionsRequestAction | GetTransactionsSuccessAction | GetTransactionsErrorAction;
 
 export const DEFAULT_STATE: ITransactionsState = {
+  error: '',
   isLoading: {},
   list: {},
   transactions: {}
@@ -41,6 +42,7 @@ export default function transactionsReducer(
       const { accountId } = action.payload;
       return {
         ...state,
+        error: '',
         isLoading: {
           ...state.isLoading,
           [accountId]: true
@@ -49,10 +51,9 @@ export default function transactionsReducer(
     }
     case types.TRANSACTIONS_SUCCESS: {
       const { transactions, accountId } = action.payload;
-      console.log({ transactions, accountId });
-      console.log(state.list);
       return {
         ...state,
+        error: '',
         isLoading: {
           ...state.isLoading,
           [accountId]: false
@@ -63,16 +64,20 @@ export default function transactionsReducer(
             ? Array.from(new Set([...state.list[accountId], ...transactions.map(account => account.transactionId)]))
             : transactions.map(account => account.transactionId)
         },
-        transactions: transactions.reduce((prev, curr) => {
-          prev[curr.transactionId] = curr;
-          return prev;
-        }, {})
+        transactions: {
+          ...state.transactions,
+          ...transactions.reduce<{ [key: string]: ITransaction }>((prev, curr) => {
+            prev[curr.transactionId] = curr;
+            return prev;
+          }, {})
+        }
       };
     }
     case types.TRANSACTIONS_ERROR: {
-      const { accountId } = action.payload;
+      const { accountId, error } = action.payload;
       return {
         ...state,
+        error,
         isLoading: {
           ...state.isLoading,
           [accountId]: false
@@ -87,6 +92,7 @@ export default function transactionsReducer(
 export const selectList = (state: IState, accountId: string) => state.transactions.list[accountId];
 export const selectIsLoading = (state: IState, accountId: string) => state.transactions.isLoading[accountId];
 export const selectTransactions = (state: IState) => state.transactions.transactions;
+export const selectError = (state: IState) => state.transactions.error;
 export const selectTransaction = (state: IState, accountId: string) => state.transactions.transactions[accountId];
 
 export const selectTransactionsSelector = createSelector(
@@ -94,7 +100,7 @@ export const selectTransactionsSelector = createSelector(
   selectTransactions,
   (state: IState, accountId: string) => accountId,
   (list, transactions, accountId) => {
-    console.log({list, transactions, accountId})
+    console.log({ list, transactions, accountId });
     return list ? list.map(transactionId => transactions[transactionId]) : null;
   }
 );

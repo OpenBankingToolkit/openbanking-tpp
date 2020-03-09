@@ -1,6 +1,7 @@
 import { Action, createSelector } from '@ngrx/store';
 
-import { IAccountsState, IAccount, IState, IBalance, IUIAccount } from '../../models';
+import { IAccountsState, IState, IBalance, IUIAccount, IBank } from '../../models';
+import { selectBanks } from './banks';
 
 export enum types {
   ACCOUNTS_REQUEST = 'ACCOUNTS_REQUEST',
@@ -19,12 +20,12 @@ export class GetAccountsRequestAction implements Action {
 
 export class GetAccountsSuccessAction implements Action {
   readonly type = types.ACCOUNTS_SUCCESS;
-  constructor(public payload: { accounts: IAccount[] }) {}
+  constructor(public payload: { banks: IBank[]; accounts: IUIAccount[] }) {}
 }
 
 export class GetAccountsErrorAction implements Action {
   readonly type = types.ACCOUNTS_ERROR;
-  constructor() {}
+  constructor(public payload: { error: string }) {}
 }
 
 export class GetAccountsBalancesRequestAction implements Action {
@@ -59,6 +60,7 @@ export type ActionsUnion =
 export const DEFAULT_STATE: IAccountsState = {
   loadingAccounts: false,
   loadingBalances: false,
+  accountsError: '',
   list: null,
   accounts: {},
   balances: {}
@@ -69,26 +71,34 @@ export default function accountsReducer(state: IAccountsState = DEFAULT_STATE, a
     case types.ACCOUNTS_REQUEST: {
       return {
         ...state,
+        accountsError: '',
         loadingAccounts: true
       };
     }
     case types.ACCOUNTS_SUCCESS: {
+      const { accounts } = action.payload;
       return {
         ...state,
+        accountsError: '',
         loadingAccounts: false,
-        list: <string[]>(
-          Array.from(new Set([...(state.list || []), ...action.payload.accounts.map(account => account.accountId)]))
-        ),
-        accounts: action.payload.accounts.reduce((prev, curr) => {
-          prev[curr.accountId] = curr;
-          return prev;
-        }, {})
+        list: <string[]>Array.from(new Set([...(state.list || []), ...accounts.map(account => account.accountId)])),
+        ...accounts.reduce<any>(
+          (prev, curr) => {
+            const { balance, ...rest } = curr;
+            prev.accounts[curr.accountId] = rest;
+            prev.balances[curr.accountId] = balance;
+            return prev;
+          },
+          { accounts: {}, balances: {} }
+        )
       };
     }
     case types.ACCOUNTS_ERROR: {
+      const { error } = action.payload;
       return {
         ...state,
-        loadingAccounts: false
+        loadingAccounts: false,
+        accountsError: error
       };
     }
     case types.ACCOUNTS_BALANCES_REQUEST: {
@@ -101,7 +111,7 @@ export default function accountsReducer(state: IAccountsState = DEFAULT_STATE, a
       return {
         ...state,
         loadingBalances: false,
-        balances: action.payload.balances.reduce((prev, curr) => {
+        balances: action.payload.balances.reduce<{ [key: string]: IBalance }>((prev, curr) => {
           prev[curr.accountId] = curr;
           return prev;
         }, {})
@@ -123,6 +133,7 @@ export default function accountsReducer(state: IAccountsState = DEFAULT_STATE, a
 
 export const selectLoadingAccounts = (state: IState) => state.accounts.loadingAccounts;
 export const selectLoadingBalances = (state: IState) => state.accounts.loadingBalances;
+export const selectAccountsError = (state: IState) => state.accounts.accountsError;
 export const selectList = (state: IState) => state.accounts.list;
 export const selectAccounts = (state: IState) => state.accounts.accounts;
 export const selectBalances = (state: IState) => state.accounts.balances;
@@ -131,8 +142,11 @@ export const selectAccountSelector = createSelector(
   selectAccounts,
   selectBalances,
   (state: IState, accountId: string) => accountId,
-  (accounts, balances, accountId): IUIAccount => {
-    return accounts[accountId] ? { ...accounts[accountId], ...balances[accountId] } : null;
+  selectBanks,
+  (accounts, balances, accountId, banks): IUIAccount | null => {
+    return accounts[accountId]
+      ? { ...accounts[accountId], ...balances[accountId], bank: banks[accounts[accountId].bankId] }
+      : null;
   }
 );
 
@@ -140,7 +154,14 @@ export const selectAccountsSelector = createSelector(
   selectList,
   selectAccounts,
   selectBalances,
-  (list, accounts, balances): IUIAccount[] => {
-    return list ? list.map(accountId => ({ ...accounts[accountId], ...balances[accountId] })) : null;
+  selectBanks,
+  (list, accounts, balances, banks): IUIAccount[] | null => {
+    console.log(banks);
+    return list
+      ? list.map(accountId => {
+          const account = accounts[accountId];
+          return { ...account, ...balances[accountId], bank: banks[account.bankId] };
+        })
+      : null;
   }
 );

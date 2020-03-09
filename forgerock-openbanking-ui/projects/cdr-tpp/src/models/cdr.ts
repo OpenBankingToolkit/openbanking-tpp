@@ -24,7 +24,27 @@ export enum ProductCategory {
   BUSINESS_LOANS = 'BUSINESS_LOANS'
 }
 
-export interface IUIAccount extends IAccount, Partial<Omit<IBalance, 'accountId'>> {}
+export interface IUIAccount extends IAccount, Partial<Omit<IBalance, 'accountId'>> {
+  bank: IBank; // this is non standard
+  bankId: string; // this is non standard and used frontend side to match a bank
+  balance: IBalance; // this is non standard
+  currentBalance: string; // this is non standard
+  currency: string; // this is non standard
+}
+
+export interface ILoginResponse {
+  token: string;
+}
+
+export interface IUser {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
+export interface IUserResponse {
+  user: IUser;
+}
 
 export interface IAccount {
   accountId: string;
@@ -39,11 +59,8 @@ export interface IAccount {
 }
 
 export interface IAccountsResponse {
-  data: {
-    accounts: IAccount[];
-  };
-  links: Links;
-  meta: Meta;
+  accounts: IUIAccount[];
+  banks: IBank[];
 }
 
 export interface ITransaction {
@@ -68,11 +85,7 @@ export interface ITransaction {
 }
 
 export interface ITransactionsResponse {
-  data: {
-    transactions: ITransaction[];
-  };
-  links: Links;
-  meta: Meta;
+  transactions: ITransaction[];
 }
 
 export interface IBalance {
@@ -100,4 +113,14 @@ export interface IBalancesResponse {
   data: { balances: IBalance[] };
   links: Links;
   meta: Meta;
+}
+
+export interface IBank {
+  id: string;
+  name: string;
+  logo: string;
+}
+
+export interface IBanksResponse {
+  banks: IBank[];
 }
