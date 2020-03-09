@@ -174,7 +174,7 @@
           "builder": "ngx-build-plus:dev-server",
           "options": {
             "browserTarget": "cdr-tpp:build",
-            "ssl": true,
+            "ssl": false,
             "port": 4208,
             "proxyConfig": "projects/cdr-tpp/proxy.conf.json"
           },

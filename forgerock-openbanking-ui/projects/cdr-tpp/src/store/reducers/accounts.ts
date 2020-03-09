@@ -2,6 +2,7 @@ import { Action, createSelector } from '@ngrx/store';
 
 import { IAccountsState, IState, IBalance, IUIAccount, IBank } from '../../models';
 import { selectBanks } from './banks';
+import { types as userTypes, GetUserLogoutSuccessAction } from './user';
 
 export enum types {
   ACCOUNTS_REQUEST = 'ACCOUNTS_REQUEST',
@@ -55,7 +56,8 @@ export type ActionsUnion =
   | GetAccountsBalancesRequestAction
   | GetAccountsBalancesSuccessAction
   | GetAccountsBalancesErrorAction
-  | GetAccountsRemoveAllAction;
+  | GetAccountsRemoveAllAction
+  | GetUserLogoutSuccessAction;
 
 export const DEFAULT_STATE: IAccountsState = {
   loadingAccounts: false,
@@ -123,6 +125,7 @@ export default function accountsReducer(state: IAccountsState = DEFAULT_STATE, a
         loadingBalances: false
       };
     }
+    case userTypes.USER_LOGOUT_SUCCESS:
     case types.ACCOUNTS_REMOVE_ALL: {
       return DEFAULT_STATE;
     }

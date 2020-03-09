@@ -26,7 +26,7 @@
     "serve.ui-integ.tpp.client": "ng serve tpp --host dev.tpp.ui-integ.forgerock.financial --browserTarget tpp:build:ui-integ --sslCert ssl/all.ui-integ.forgerock.financial.crt --sslKey ssl/k-all.ui-integ.forgerock.financial.key",
     "=================CLUSTER CDR=================": "",
     "serve.cdr.tpp": "run-p serve.cdr.tpp.client serve.tpp.server",
-    "serve.cdr.tpp.client": "ng serve cdr-tpp --host dev.cdr-tpp.cdr.forgerock.financial --browserTarget cdr-tpp:build:cdr --sslCert ssl/wildcard.cdr.forgerock.financial.crt --sslKey ssl/k-wildcard.cdr.forgerock.financial.key",
+    "serve.cdr.tpp.client": "ng serve cdr-tpp --host 127.0.0.1 --browserTarget cdr-tpp:build:cdr",
     "serve.compose.cdr.tpp.client": "ng serve cdr-tpp --host 0.0.0.0 --browserTarget cdr-tpp:build:compose --ssl false",
     "serve.compose.cdr": "run-p serve.compose.cdr.tpp.client serve.cdr-tpp.server",
     "start.compose": "npm run serve.compose.cdr"

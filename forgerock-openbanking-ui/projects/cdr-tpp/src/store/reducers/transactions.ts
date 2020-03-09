@@ -1,6 +1,7 @@
 import { Action, createSelector } from '@ngrx/store';
 
 import { ITransactionsState, ITransaction, IState } from '../../models';
+import { types as userTypes, GetUserLogoutSuccessAction } from './user';
 
 export enum types {
   TRANSACTIONS_REQUEST = 'TRANSACTIONS_REQUEST',
@@ -24,7 +25,7 @@ export class GetTransactionsErrorAction implements Action {
   constructor(public payload: { accountId: string; error: string }) {}
 }
 
-export type ActionsUnion = GetTransactionsRequestAction | GetTransactionsSuccessAction | GetTransactionsErrorAction;
+export type ActionsUnion = GetTransactionsRequestAction | GetTransactionsSuccessAction | GetTransactionsErrorAction | GetUserLogoutSuccessAction;
 
 export const DEFAULT_STATE: ITransactionsState = {
   error: '',
@@ -83,6 +84,9 @@ export default function transactionsReducer(
           [accountId]: false
         }
       };
+    }
+    case userTypes.USER_LOGOUT_SUCCESS: {
+      return DEFAULT_STATE;
     }
     default:
       return state;

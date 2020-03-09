@@ -3,6 +3,7 @@ import _get from 'lodash-es/get';
 
 import { IBanksState, IBank, IState } from '../../models';
 import { types as accountsTypes, GetAccountsSuccessAction } from './accounts';
+import { types as userTypes, GetUserLogoutSuccessAction } from './user';
 
 export enum types {
   BANKS_REQUEST = 'BANKS_REQUEST',
@@ -26,7 +27,7 @@ export class GetBanksErrorAction implements Action {
   constructor() {}
 }
 
-export type ActionsUnion = GetBanksRequestAction | GetBanksSuccessAction | GetBanksErrorAction;
+export type ActionsUnion = GetBanksRequestAction | GetBanksSuccessAction | GetBanksErrorAction | GetUserLogoutSuccessAction;
 
 export const DEFAULT_STATE: IBanksState = {
   isLoading: false,
@@ -72,6 +73,9 @@ export default function banksReducer(
         ...state,
         isLoading: false
       };
+    }
+    case userTypes.USER_LOGOUT_SUCCESS: {
+      return DEFAULT_STATE;
     }
     default:
       return state;
