@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+
 import { ForgerockMessagesService } from '@forgerock/openbanking-ngx-common/services/forgerock-messages';
 import { CDRService } from '../../services/cdr.service';
 
@@ -75,7 +75,6 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup;
 
   constructor(
-    private http: HttpClient,
     private cdrService: CDRService,
     private messages: ForgerockMessagesService,
     private router: Router

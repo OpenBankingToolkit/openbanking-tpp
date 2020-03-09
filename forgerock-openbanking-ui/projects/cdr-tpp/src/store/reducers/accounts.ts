@@ -155,13 +155,11 @@ export const selectAccountsSelector = createSelector(
   selectAccounts,
   selectBalances,
   selectBanks,
-  (list, accounts, balances, banks): IUIAccount[] | null => {
-    console.log(banks);
-    return list
+  (list, accounts, balances, banks): IUIAccount[] | null =>
+    list
       ? list.map(accountId => {
           const account = accounts[accountId];
           return { ...account, ...balances[accountId], bank: banks[account.bankId] };
         })
-      : null;
-  }
+      : null
 );

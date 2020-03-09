@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ import {
   selectLoadingBalances,
   selectAccountsError
 } from 'cdr-tpp/src/store/reducers/accounts';
-import { first, filter } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-accounts-container',

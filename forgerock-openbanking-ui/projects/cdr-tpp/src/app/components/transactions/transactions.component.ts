@@ -5,16 +5,13 @@ import {
   Input,
   ElementRef,
   ViewChild,
-  HostListener,
   AfterViewInit,
   ChangeDetectorRef
 } from '@angular/core';
 
 import { IUIAccount, ITransaction } from 'cdr-tpp/src/models';
 import { ngForStagger } from '../animations';
-import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/overlay';
-
-const appToolbarHeight = 56;
+import { ScrollDispatcher } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-transactions',

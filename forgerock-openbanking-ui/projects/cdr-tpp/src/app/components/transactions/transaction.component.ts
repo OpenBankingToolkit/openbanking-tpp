@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { ITransaction, ProductCategory } from 'cdr-tpp/src/models';
+import { ITransaction } from 'cdr-tpp/src/models';
 
 @Component({
   selector: 'app-transaction',

@@ -98,9 +98,5 @@ export const selectTransaction = (state: IState, accountId: string) => state.tra
 export const selectTransactionsSelector = createSelector(
   selectList,
   selectTransactions,
-  (state: IState, accountId: string) => accountId,
-  (list, transactions, accountId) => {
-    console.log({ list, transactions, accountId });
-    return list ? list.map(transactionId => transactions[transactionId]) : null;
-  }
+  (list, transactions, accountId) => (list ? list.map(transactionId => transactions[transactionId]) : null)
 );

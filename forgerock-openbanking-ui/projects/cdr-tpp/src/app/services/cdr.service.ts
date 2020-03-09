@@ -6,8 +6,6 @@ import { ForgerockConfigService } from '@forgerock/openbanking-ngx-common/servic
 import {
   IAccountsResponse,
   ITransactionsResponse,
-  IBalanceResponse,
-  IBalancesResponse,
   ILoginResponse,
   IBanksResponse,
   IUserResponse

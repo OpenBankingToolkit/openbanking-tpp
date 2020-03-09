@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { CookieService } from 'ngx-cookie';
 import { Store } from '@ngrx/store';
 
 import { IState } from 'cdr-tpp/src/models';
@@ -13,16 +12,11 @@ import { GetUserSuccessAction, GetUserErrorAction } from 'cdr-tpp/src/store/redu
 export class HasTokenGuard implements CanActivate {
   constructor(
     private router: Router,
-    private cookieService: CookieService,
     protected store: Store<IState>,
     protected cdrService: CDRService
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log('eeeee', state.url);
-    // const bearer = this.cookieService.get('bearer');
-    // return bearer !== undefined;
-
     return this.cdrService.getUser().pipe(
       map(response => {
         this.store.dispatch(new GetUserSuccessAction({ user: response.user }));

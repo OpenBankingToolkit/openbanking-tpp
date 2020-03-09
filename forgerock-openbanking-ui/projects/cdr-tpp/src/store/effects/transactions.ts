@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ForgerockMessagesService } from '@forgerock/openbanking-ngx-common/services/forgerock-messages';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, delay } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import _get from 'lodash-es/get';
 
 import {

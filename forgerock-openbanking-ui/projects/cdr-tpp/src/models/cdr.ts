@@ -24,14 +24,6 @@ export enum ProductCategory {
   BUSINESS_LOANS = 'BUSINESS_LOANS'
 }
 
-export interface IUIAccount extends IAccount, Partial<Omit<IBalance, 'accountId'>> {
-  bank: IBank; // this is non standard
-  bankId: string; // this is non standard and used frontend side to match a bank
-  balance: IBalance; // this is non standard
-  currentBalance: string; // this is non standard
-  currency: string; // this is non standard
-}
-
 export interface ILoginResponse {
   token: string;
 }
@@ -56,6 +48,14 @@ export interface IAccount {
   maskedNumber: string;
   productCategory: ProductCategory;
   productName: string;
+}
+
+export interface IUIAccount extends IAccount, Partial<Omit<IBalance, 'accountId'>> {
+  bank: IBank; // this is non standard
+  bankId: string; // this is non standard and used frontend side to match a bank
+  balance: IBalance; // this is non standard
+  currentBalance: string; // this is non standard
+  currency: string; // this is non standard
 }
 
 export interface IAccountsResponse {

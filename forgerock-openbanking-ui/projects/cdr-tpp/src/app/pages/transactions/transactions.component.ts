@@ -3,7 +3,6 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   ElementRef,
-  AfterViewInit,
   NgZone,
   OnDestroy
 } from '@angular/core';
@@ -24,7 +23,6 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.cdkScrollable = new CdkScrollable(this.hostRef, this.scrollDispatcher, this.ngZone);
     this.cdkScrollable.ngOnInit();
-    console.log(this.scrollDispatcher)
     // this.scrollDispatcher.register(this.cdkScrollable);
   }
   ngOnDestroy() {

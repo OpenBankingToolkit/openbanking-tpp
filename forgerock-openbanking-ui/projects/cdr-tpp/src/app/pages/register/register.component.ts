@@ -2,16 +2,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
 import { ForgerockConfigService } from '@forgerock/openbanking-ngx-common/services/forgerock-config';
 import { ForgerockMessagesService } from '@forgerock/openbanking-ngx-common/services/forgerock-messages';
-import { CDRService } from '../../services/cdr.service';
 
 @Component({
   selector: 'app-register',
   template: `
     <mat-card>
       <mat-card-content>
-        <h1>Register to {{appName}} demo app</h1>
+        <h1>Register to {{ appName }} demo app</h1>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
           <mat-form-field class="full-width">
             <input matInput placeholder="First Name" formControlName="firstName" required autocomplete="given-name" />
@@ -91,7 +91,6 @@ export class RegisterComponent implements OnInit {
   appName: '';
   constructor(
     private http: HttpClient,
-    private cdrService: CDRService,
     private configService: ForgerockConfigService,
     private messages: ForgerockMessagesService,
     private router: Router

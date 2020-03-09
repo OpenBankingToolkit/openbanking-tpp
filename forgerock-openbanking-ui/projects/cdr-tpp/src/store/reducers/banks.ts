@@ -47,7 +47,6 @@ export default function banksReducer(
     }
     case types.BANKS_SUCCESS: {
       const { banks } = action.payload;
-      console.log({ banks });
       return {
         ...state,
         isLoading: false,
@@ -60,7 +59,6 @@ export default function banksReducer(
     }
     case accountsTypes.ACCOUNTS_SUCCESS: {
       const { banks } = action.payload;
-      console.log({ banks });
       return {
         ...state,
         banks: banks.reduce<{ [key: string]: IBank }>((prev, curr) => {
