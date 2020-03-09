@@ -25,7 +25,7 @@ jobs:
           ./node_modules/@angular/cli/bin/ng lint
       - name: Prepare customers
         working-directory: ./forgerock-openbanking-ui
-        run: git clone https://$GITHUB_ACCESS_TOKEN@github.com/ForgeCloud/ob-customers.git customers
+        run: git clone https://${{ secrets.FORGECLOUD_ACCESS_TOKEN }}@github.com/ForgeCloud/ob-customers.git customers
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
