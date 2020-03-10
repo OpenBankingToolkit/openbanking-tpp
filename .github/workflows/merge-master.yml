@@ -15,8 +15,17 @@ jobs:
 
       - uses: actions/cache@v1
         with:
-          path: /root/.m2/repository
+          path: /home/runner/work/_temp/_github_home/.m2/repository
           key: ${{ runner.os }}-maven-mm-${{ hashFiles('**/pom.xml') }}
+
+      - name: Set up maven settings file with creds for Bintray
+          uses: actions/setup-java@v1
+          with:
+            java-version: '11'
+            architecture: x64
+            server-id: central
+            server-username: MAVEN_USERNAME
+            server-password: MAVEN_PASSWORD
 
       - name: Create Package
         uses: benjefferies/create-bintray-package@master
@@ -39,12 +48,16 @@ jobs:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           enforce_admins: false
 
+      - name: Setup git
+        run: git config --global
       - name: Release
-        uses: qcastel/github-actions-maven-release@master
+        uses: bohocode/github-actions-maven-release@master
         with:
           gpg-enabled: "true"
           gpg-key-id: ${{ secrets.GITHUB_GPG_KEY_ID }}
           gpg-key: ${{ secrets.GITHUB_GPG_KEY }}
+
+          maven-local-repo-path: /github/home/.m2/repository
 
           maven-args: "-Dmaven.javadoc.skip=true -DskipTests -Ddockerfile.skip -DskipITs -DdockerCompose.skip"
           maven-repo-server-id: bintray-openbankingtoolkit-OpenBankingToolkit
@@ -62,7 +75,3 @@ jobs:
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           enforce_admins: true
-
-      - uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
