@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    ports:
+       - "27017:27017"
+    volumes:
+      - ./mongo/:/docker-entrypoint-initdb.d/
+  server:
+    build:
+      context: .
+      dockerfile: ./projects/cdr-tpp/docker/Dockerfile-cdr-tpp-server
+    environment:
+      MONGO_HOST: mongo
+      MONGO_DB: moneywatch
+    ports:
+      - "5000:5000"
+  ui:
+    build:
+      context: .
+      dockerfile: ./projects/cdr-tpp/docker/Dockerfile-cdr-tpp-ui
+    environment:
+      NODE_BACKEND_URL: http://localhost:5000
+    ports:
+      - "4208:80"
+
+      

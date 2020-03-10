@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strict": false,
     "baseUrl": "./",
     "importHelpers": true,
     "outDir": "./dist/out-tsc",
@@ -21,6 +22,8 @@
       "@fuse/*": ["projects/@fuse/*"],
       "tpp": ["projects/tpp"],
       "tpp/*": ["projects/tpp/*"],
+      "cdr-tpp": ["projects/cdr-tpp"],
+      "cdr-tpp/*": ["projects/cdr-tpp/*"],
       "@utils": ["utils"],
       "@utils/*": ["utils/*"],
       "forgerock": ["projects/forgerock"],

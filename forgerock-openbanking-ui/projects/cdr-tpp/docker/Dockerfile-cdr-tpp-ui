@@ -1,0 +1,24 @@
+# Stage 1 - the build process
+FROM node:10 as build-ui
+
+WORKDIR /src
+ADD package.json package-lock.json /src/
+
+RUN NG_CLI_ANALYTICS=ci npm ci
+
+ADD . /src
+
+CMD npm run build.cdr-tpp.compose
+
+# Stage 2 - the production environment
+FROM nginx:1.13.9-alpine
+
+EXPOSE 80
+
+RUN rm -rf /etc/nginx/conf.d
+COPY --from=build-ui /src/dist/cdr-tpp /usr/share/nginx/html
+COPY projects/cdr-tpp/docker/deployment-settings.json /usr/share/nginx/html/deployment-settings.json
+COPY projects/cdr-tpp/docker/nginx.conf /etc/nginx/conf.d/default.conf
+COPY projects/cdr-tpp/docker/start.sh /opt/start.sh
+
+CMD ["/opt/start.sh"]

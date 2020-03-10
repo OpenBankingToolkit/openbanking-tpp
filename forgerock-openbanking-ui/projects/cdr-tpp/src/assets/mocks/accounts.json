@@ -1,0 +1,32 @@
+{
+  "data": {
+    "accounts": [
+      {
+        "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+        "creationDate": "2019-11-01T18:22:50.977Z",
+        "displayName": "UK Bills",
+        "openStatus": "OPEN",
+        "isOwned": true,
+        "maskedNumber": "99473024124942",
+        "productCategory": "TRANS_AND_SAVINGS_ACCOUNTS",
+        "productName": "TRANS_AND_SAVINGS_ACCOUNTS"
+      },
+      {
+        "accountId": "fa81c3b4-815c-4a3d-aaa1-ce77346a41d9",
+        "creationDate": "2019-11-01T18:22:52.184Z",
+        "displayName": "Household",
+        "openStatus": "OPEN",
+        "isOwned": true,
+        "maskedNumber": "76132017630210",
+        "productCategory": "TRANS_AND_SAVINGS_ACCOUNTS",
+        "productName": "TRANS_AND_SAVINGS_ACCOUNTS"
+      }
+    ]
+  },
+  "links": {
+    "self": "https://matls.rs.aspsp.cdr.forgerock.financial/banking/accounts?page=0"
+  },
+  "meta": {
+    "totalPages": 1
+  }
+}

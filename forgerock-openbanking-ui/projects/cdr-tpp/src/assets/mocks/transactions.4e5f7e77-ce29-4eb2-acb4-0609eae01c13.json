@@ -1,0 +1,145 @@
+{
+    "data": {
+        "transactions": [
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "c7eb300a-c9f2-4657-92b6-7652a7e81297",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash from Goodman, Jescie C.",
+                "postingDateTime": "2018-11-01T21:07:44.983Z",
+                "executionDateTime": "2018-11-01T21:12:19.983Z",
+                "amount": "489.22",
+                "currency": "GBP",
+                "reference": "Ref 6512"
+            },
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "1d2a5ce7-5ea2-4b19-b3a3-d3bf72160047",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash from Dudley, Meredith R.",
+                "postingDateTime": "2018-11-02T20:37:18.983Z",
+                "executionDateTime": "2018-11-02T20:41:24.983Z",
+                "amount": "202.46",
+                "currency": "GBP",
+                "reference": "Ref 7419"
+            },
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "069389f9-222f-4334-8f05-d5a588c2fe50",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash to Oneil, Shelley Y.",
+                "postingDateTime": "2018-11-03T17:19:35.983Z",
+                "executionDateTime": "2018-11-03T17:21:13.983Z",
+                "amount": "402.94",
+                "currency": "GBP",
+                "reference": "Ref 6662"
+            },
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "74785b01-fab4-4296-85b8-dd31da7058e0",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash to Glover, Lara R.",
+                "postingDateTime": "2018-11-06T11:59:50.983Z",
+                "executionDateTime": "2018-11-06T12:01:24.983Z",
+                "amount": "233.39",
+                "currency": "GBP",
+                "reference": "Ref 2737"
+            },
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "ed838499-75f7-4722-906d-40e3c573e199",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash from Tucker, Nell T.",
+                "postingDateTime": "2018-11-06T17:31:27.983Z",
+                "executionDateTime": "2018-11-06T17:33:47.983Z",
+                "amount": "375.21",
+                "currency": "GBP",
+                "reference": "Ref 5362"
+            },
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "e88ba9ab-7dc4-444f-a0eb-0b91e5e3ec62",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash to Valencia, Dara N.",
+                "postingDateTime": "2018-11-07T01:33:16.983Z",
+                "executionDateTime": "2018-11-07T01:34:54.983Z",
+                "amount": "108.57",
+                "currency": "GBP",
+                "reference": "Ref 2695"
+            },
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "1519ba1b-6128-468e-b105-fece502a0f1d",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash to Lindsay, Quynn M.",
+                "postingDateTime": "2018-11-10T11:25:15.983Z",
+                "executionDateTime": "2018-11-10T11:29:19.983Z",
+                "amount": "390.49",
+                "currency": "GBP",
+                "reference": "Ref 5540"
+            },
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "2c18bcb1-289c-46d8-9283-08f7c6d4866f",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash to Lawrence, Emmanuel M.",
+                "postingDateTime": "2018-11-10T19:37:20.983Z",
+                "executionDateTime": "2018-11-10T19:38:56.983Z",
+                "amount": "236.36",
+                "currency": "GBP",
+                "reference": "Ref 8233"
+            },
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "2d205a94-e294-40ff-81d6-c4304e4b8324",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash from Francis, Arthur N.",
+                "postingDateTime": "2018-11-11T22:03:12.983Z",
+                "executionDateTime": "2018-11-11T22:07:53.983Z",
+                "amount": "62.92",
+                "currency": "GBP",
+                "reference": "Ref 1388"
+            },
+            {
+                "accountId": "4e5f7e77-ce29-4eb2-acb4-0609eae01c13",
+                "transactionId": "6f5031f4-6e86-49bd-a6e2-a83cb8118b3c",
+                "isDetailAvailable": true,
+                "type": "PAYMENT",
+                "status": "POSTED",
+                "description": "Cash from Farmer, Eve C.",
+                "postingDateTime": "2018-11-13T22:46:12.983Z",
+                "executionDateTime": "2018-11-13T22:47:22.983Z",
+                "amount": "118.10",
+                "currency": "GBP",
+                "reference": "Ref 7096"
+            }
+        ]
+    },
+    "links": {
+        "self": "https://matls.rs.aspsp.cdr.forgerock.financial/banking/accounts/4e5f7e77-ce29-4eb2-acb4-0609eae01c13/transactions",
+        "first": "https://matls.rs.aspsp.cdr.forgerock.financial/banking/accounts/4e5f7e77-ce29-4eb2-acb4-0609eae01c13/transactions?page=0",
+        "next": "https://matls.rs.aspsp.cdr.forgerock.financial/banking/accounts/4e5f7e77-ce29-4eb2-acb4-0609eae01c13/transactions?page=1",
+        "last": "https://matls.rs.aspsp.cdr.forgerock.financial/banking/accounts/4e5f7e77-ce29-4eb2-acb4-0609eae01c13/transactions?page=23"
+    },
+    "meta": {
+        "totalPages": 24
+    }
+}
