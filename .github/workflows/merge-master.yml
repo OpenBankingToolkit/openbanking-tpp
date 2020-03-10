@@ -48,8 +48,6 @@ jobs:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           enforce_admins: false
 
-      - name: Setup git
-        run: git config --global
       - name: Release
         uses: bohocode/github-actions-maven-release@master
         with:
