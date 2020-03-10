@@ -1,0 +1,24 @@
+name: Publish package to the ForgeRock artifactory
+on:
+  release:
+    types: [created]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Artifactory Repository
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          architecture: x64
+          server-id: central
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+
+      - name: Pre-release package
+        run:  mvn -B deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.ARTIFACTORY_TOKEN }}
