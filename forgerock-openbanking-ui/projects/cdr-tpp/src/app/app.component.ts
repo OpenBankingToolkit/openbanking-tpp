@@ -4,7 +4,6 @@ import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 
-import { ForgerockConfigService } from '@forgerock/openbanking-ngx-common/services/forgerock-config';
 import { ForgerockSplashscreenService } from '@forgerock/openbanking-ngx-common/services/forgerock-splashscreen';
 
 @Component({
@@ -24,14 +23,12 @@ import { ForgerockSplashscreenService } from '@forgerock/openbanking-ngx-common/
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
-  enableCustomization: string = this.configService.get('enableCustomization');
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
   constructor(
     @Inject(DOCUMENT) private document: any,
     private splashscreenService: ForgerockSplashscreenService,
-    private configService: ForgerockConfigService,
     private platform: Platform,
     private translateService: TranslateService,
     private media: MediaMatcher,

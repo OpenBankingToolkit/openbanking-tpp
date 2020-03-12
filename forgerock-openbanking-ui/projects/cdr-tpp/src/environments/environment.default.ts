@@ -11,8 +11,7 @@ export const environment = {
     logoWidth: 230,
     logoHeight: 'auto'
   },
-  devModules: [],
-  enableCustomization: 'false'
+  devModules: []
 };
 
 /*
