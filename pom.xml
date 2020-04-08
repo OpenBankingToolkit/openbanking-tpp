@@ -27,7 +27,7 @@
     <name>ForgeRock OpenBanking Reference Implementation - TPP</name>
     <groupId>com.forgerock.openbanking.tpp</groupId>
     <artifactId>forgerock-openbanking-reference-implementation-tpp</artifactId>
-    <version>1.0.51-SNAPSHOT</version>
+    <version>1.0.53-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -135,6 +135,16 @@
     </distributionManagement>
 
     <repositories>
+        <repository>
+            <id>maven.forgerock.org-community</id>
+            <name>maven.forgerock.org-releases</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
+        </repository>
+        <repository>
+            <id>maven.forgerock.org-community-snapshots</id>
+            <name>maven.forgerock.org-snapshots</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
+        </repository>
         <repository>
             <id>jcenter</id>
             <url>https://jcenter.bintray.com/</url>
