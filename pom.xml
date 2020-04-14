@@ -115,8 +115,8 @@
     </dependencyManagement>
 
     <scm>
-        <connection>scm:git:https://github.com/OpenBankingToolkit/openbanking-tpp.git</connection>
-        <developerConnection>scm:git:https://github.com/OpenBankingToolkit/openbanking-tpp.git</developerConnection>
+        <connection>scm:git:git@github.com:OpenBankingToolkit/openbanking-tpp.git</connection>
+        <developerConnection>scm:git:git@github.com:OpenBankingToolkit/openbanking-tpp.git</developerConnection>
         <url>https://github.com/OpenBankingToolkit/openbanking-tpp.git</url>
         <tag>forgerock-openbanking-reference-implementation-tpp-1.0.21</tag>
     </scm>
