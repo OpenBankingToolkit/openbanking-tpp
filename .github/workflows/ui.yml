@@ -55,7 +55,8 @@ jobs:
           export BUILD_VERSION=$(jq -r ".project_version" package.json)-${GITHUB_SHA::7}
           echo "Building docker image eu.gcr.io/openbanking-214714/obri/tpp-node:${BUILD_VERSION}"
           echo "${{ secrets.GCR_JSON_KEY_BASE64 }}" | base64 -d | docker login eu.gcr.io -u _json_key --password-stdin
-          docker build -f projects/tpp/docker/Dockerfile-server -t eu.gcr.io/openbanking-214714/obri/tpp-node:$BUILD_VERSION .
+          docker build  --build-arg BUILD_VERSION=$BUILD_VERSION -f projects/tpp/docker/Dockerfile-server -t eu.gcr.io/openbanking-214714/obri/tpp-node:latest -t eu.gcr.io/openbanking-214714/obri/tpp-node:$BUILD_VERSION .
+          docker push eu.gcr.io/openbanking-214714/obri/tpp-node:latest
           docker push eu.gcr.io/openbanking-214714/obri/tpp-node:$BUILD_VERSION
   build_tpp_ui:
     name: Build TPP App
@@ -82,7 +83,8 @@ jobs:
           export BUILD_VERSION=$(jq -r ".project_version" package.json)-${GITHUB_SHA::7}
           echo "Building docker image eu.gcr.io/openbanking-214714/obri/tpp-ui:${BUILD_VERSION}"
           echo "${{ secrets.GCR_JSON_KEY_BASE64 }}" | base64 -d | docker login eu.gcr.io -u _json_key --password-stdin
-          docker build -f projects/tpp/docker/Dockerfile -t eu.gcr.io/openbanking-214714/obri/tpp-ui:$BUILD_VERSION .
+          docker build --build-arg BUILD_VERSION=$BUILD_VERSION -f projects/tpp/docker/Dockerfile -t eu.gcr.io/openbanking-214714/obri/tpp-ui:latest -t eu.gcr.io/openbanking-214714/obri/tpp-ui:$BUILD_VERSION .
+          docker push eu.gcr.io/openbanking-214714/obri/tpp-ui:latest
           docker push eu.gcr.io/openbanking-214714/obri/tpp-ui:$BUILD_VERSION
   update_ob_deploy:
     name: Update ob-deploy
