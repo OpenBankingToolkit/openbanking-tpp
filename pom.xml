@@ -27,7 +27,7 @@
     <name>ForgeRock OpenBanking Reference Implementation - TPP</name>
     <groupId>com.forgerock.openbanking.tpp</groupId>
     <artifactId>forgerock-openbanking-reference-implementation-tpp</artifactId>
-    <version>1.0.50-SNAPSHOT</version>
+    <version>1.0.54-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -115,34 +115,36 @@
     </dependencyManagement>
 
     <scm>
-        <connection>scm:git:https://github.com/OpenBankingToolkit/openbanking-tpp.git</connection>
-        <developerConnection>scm:git:https://github.com/OpenBankingToolkit/openbanking-tpp.git</developerConnection>
+        <connection>scm:git:git@github.com:OpenBankingToolkit/openbanking-tpp.git</connection>
+        <developerConnection>scm:git:git@github.com:OpenBankingToolkit/openbanking-tpp.git</developerConnection>
         <url>https://github.com/OpenBankingToolkit/openbanking-tpp.git</url>
         <tag>forgerock-openbanking-reference-implementation-tpp-1.0.21</tag>
     </scm>
 
     <distributionManagement>
         <repository>
-            <id>bintray-openbankingtoolkit-OpenBankingToolkit</id>
-            <name>OpenBankingToolkit TPP</name>
-            <url>https://api.bintray.com/maven/openbanking-toolkit/OpenBankingToolKit/openbanking-tpp/;publish=1</url>
+            <id>maven.forgerock.org-community</id>
+            <name>maven.forgerock.org-releases</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
         </repository>
+        <snapshotRepository>
+            <id>maven.forgerock.org-community-snapshots</id>
+            <name>maven.forgerock.org-snapshots</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
+        </snapshotRepository>
     </distributionManagement>
 
-<!--    <distributionManagement>-->
-<!--        <repository>-->
-<!--            <id>central</id>-->
-<!--            <name>maven.forgerock.org-releases</name>-->
-<!--            <url>https://maven.forgerock.org:443/repo/community</url>-->
-<!--        </repository>-->
-<!--        <snapshotRepository>-->
-<!--            <id>snapshots</id>-->
-<!--            <name>maven.forgerock.org-snapshots</name>-->
-<!--            <url>https://maven.forgerock.org:443/repo/community</url>-->
-<!--        </snapshotRepository>-->
-<!--    </distributionManagement>-->
-
     <repositories>
+        <repository>
+            <id>maven.forgerock.org-community</id>
+            <name>maven.forgerock.org-releases</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
+        </repository>
+        <repository>
+            <id>maven.forgerock.org-community-snapshots</id>
+            <name>maven.forgerock.org-snapshots</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
+        </repository>
         <repository>
             <id>jcenter</id>
             <url>https://jcenter.bintray.com/</url>
