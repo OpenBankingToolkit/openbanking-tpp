@@ -40,7 +40,7 @@ jobs:
       - working-directory: ./forgerock-openbanking-ui
         id: version
         run: |
-          export BUILD_VERSION=$(jq -r ".project_version" package.json)
+          export BUILD_VERSION=$(jq -r ".project_version" package.json)-${GITHUB_SHA::7}
           echo "::set-output name=BUILD_VERSION::$BUILD_VERSION"
       - name: Download Artifact
         uses: actions/download-artifact@master
@@ -52,7 +52,7 @@ jobs:
       - name: Build TPP backend docker image
         working-directory: ./forgerock-openbanking-ui
         run: |
-          export BUILD_VERSION=$(jq -r ".project_version" package.json)
+          export BUILD_VERSION=$(jq -r ".project_version" package.json)-${GITHUB_SHA::7}
           echo "Building docker image eu.gcr.io/openbanking-214714/obri/tpp-node:${BUILD_VERSION}"
           echo "${{ secrets.GCR_JSON_KEY_BASE64 }}" | base64 -d | docker login eu.gcr.io -u _json_key --password-stdin
           docker build -f projects/tpp/docker/Dockerfile-server -t eu.gcr.io/openbanking-214714/obri/tpp-node:$BUILD_VERSION .
@@ -67,7 +67,7 @@ jobs:
       - working-directory: ./forgerock-openbanking-ui
         id: version
         run: |
-          export BUILD_VERSION=$(jq -r ".project_version" package.json)
+          export BUILD_VERSION=$(jq -r ".project_version" package.json)-${GITHUB_SHA::7}
           echo "::set-output name=BUILD_VERSION::$BUILD_VERSION"
       - name: Download Artifact
         uses: actions/download-artifact@master
@@ -79,7 +79,7 @@ jobs:
       - name: Build TPP APP docker image
         working-directory: ./forgerock-openbanking-ui
         run: |
-          export BUILD_VERSION=$(jq -r ".project_version" package.json)
+          export BUILD_VERSION=$(jq -r ".project_version" package.json)-${GITHUB_SHA::7}
           echo "Building docker image eu.gcr.io/openbanking-214714/obri/tpp-ui:${BUILD_VERSION}"
           echo "${{ secrets.GCR_JSON_KEY_BASE64 }}" | base64 -d | docker login eu.gcr.io -u _json_key --password-stdin
           docker build -f projects/tpp/docker/Dockerfile -t eu.gcr.io/openbanking-214714/obri/tpp-ui:$BUILD_VERSION .
@@ -95,7 +95,7 @@ jobs:
       - working-directory: ./forgerock-openbanking-ui
         id: version
         run: |
-          export BUILD_VERSION=$(jq -r ".project_version" package.json)
+          export BUILD_VERSION=$(jq -r ".project_version" package.json)-${GITHUB_SHA::7}
           echo "::set-output name=BUILD_VERSION::$BUILD_VERSION"
       - name: Checkout Repo
         uses: actions/checkout@v2
