@@ -1,28 +1,31 @@
-version: '3'
-
+version: '3.7'
 services:
-  mongo:
-    image: mongo
+  tpp-ui:
+    image: eu.gcr.io/openbanking-214714/obri/tpp-ui:latest
     ports:
-       - "27017:27017"
-    volumes:
-      - ./mongo/:/docker-entrypoint-initdb.d/
-  server:
-    build:
-      context: .
-      dockerfile: ./projects/cdr-tpp/docker/Dockerfile-cdr-tpp-server
+      - "4207:80"
     environment:
-      MONGO_HOST: mongo
-      MONGO_DB: moneywatch
+      DOMAIN: ui-integ.forgerock.financial
+      TEMPLATE: hsbc
+      # The following env vars are all based on DOMAIN but can be set with any value (interesting locally with different ports)
+      NODE_BACKEND_URL: "http://localhost:5000" # "https://node.tpp.DOMAIN"
+  tpp-node:
+    image: eu.gcr.io/openbanking-214714/obri/tpp-node:latest
     ports:
-      - "5000:5000"
-  ui:
-    build:
-      context: .
-      dockerfile: ./projects/cdr-tpp/docker/Dockerfile-cdr-tpp-ui
+      - "5000:8443"
     environment:
-      NODE_BACKEND_URL: http://localhost:5000
-    ports:
-      - "4208:80"
+      DOMAIN: ui-integ.forgerock.financial
+      NODE_ENV: "dev"
+      PORT: 8443
+      # The following env vars are all based on DOMAIN but can be set with any value (interesting locally with different ports)
+      TPP_URL: "http://tpp-ui:443"
+      # BANK_URL: "https://bank.DOMAIN"
+      # MONITORING_BACKEND_URL: "https://monitoring.DOMAIN"
+      # RS_BACKEND_URL: "https://rs.aspsp.DOMAIN"
+      # AUTHORIZATION_URL: "https://as.aspsp.DOMAIN"
+      # DIRECTORY_BACKEND_URL: "https://matls.service.directory.DOMAIN"
+      # JWKMS_BACKEND_URL: "https://jwkms.DOMAIN"
+      # MATLS_BACKEND_URL: "https://matls.as.aspsp.DOMAIN"
 
-      
+
+     

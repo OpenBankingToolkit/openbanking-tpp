@@ -3,6 +3,8 @@ import * as cors from 'cors';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
+import * as fs from 'fs-extra';
+import * as https from 'https';
 
 import { Iconfig } from './models';
 import TppAsService from './as.service';
@@ -50,6 +52,8 @@ async function run() {
   const directoryService = new TppDirectoryService(config);
   const jwkmsService = new TppJWKMSService(config);
   const matlsService = new TppMatlsBackendService(config);
+  const keyPath = process.env.HTTPS_KEY_PATH || '/src/dist/server.key';
+  const certPath = process.env.HTTPS_CRT_PATH || '/src/dist/server.crt';
 
   app.get('/config', (req: express.Request, res: express.Response) =>
     res.send({
@@ -91,9 +95,27 @@ async function run() {
     });
   });
 
-  app.listen(app.get('port'), () => {
-    console.log(`Web server listening on port ${app.get('port')}`);
-  });
+  if (fs.pathExistsSync(keyPath) && fs.pathExistsSync(certPath)) {
+    // self signed certs
+    const key = fs.readFileSync(keyPath, 'utf8');
+    const cert = fs.readFileSync(certPath, 'utf8');
+
+    https
+      .createServer(
+        {
+          key,
+          cert
+        },
+        app
+      )
+      .listen(app.get('port'), () => {
+        console.log(`HTTPS server listening on port ${app.get('port')}`);
+      });
+  } else {
+    app.listen(app.get('port'), () => {
+      console.log(`HTTP server listening on port ${app.get('port')}`);
+    });
+  }
 
   async function test() {
     const { id: MONITORING_UID } = await monitoringService.init();
