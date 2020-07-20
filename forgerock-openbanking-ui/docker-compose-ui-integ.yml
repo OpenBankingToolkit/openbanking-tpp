@@ -5,16 +5,16 @@ services:
     ports:
       - "4207:80"
     environment:
-      DOMAIN: dev-ob.forgerock.financial
-      # TEMPLATE: hsbc
+      DOMAIN: ui-integ.forgerock.financial
+      TEMPLATE: hsbc
       # The following env vars are all based on DOMAIN but can be set with any value (interesting locally with different ports)
-      NODE_BACKEND_URL: "http://localhost:5001" # "https://node.tpp.DOMAIN"
+      NODE_BACKEND_URL: "http://localhost:5000" # "https://node.tpp.DOMAIN"
   tpp-node:
     image: eu.gcr.io/openbanking-214714/obri/tpp-node:latest
     ports:
-      - "5001:8443"
+      - "5000:8443"
     environment:
-      DOMAIN: dev-ob.forgerock.financial
+      DOMAIN: ui-integ.forgerock.financial
       NODE_ENV: "dev"
       PORT: 8443
       # The following env vars are all based on DOMAIN but can be set with any value (interesting locally with different ports)
@@ -28,3 +28,4 @@ services:
       # MATLS_BACKEND_URL: "https://matls.as.aspsp.DOMAIN"
 
 
+     

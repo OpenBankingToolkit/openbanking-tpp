@@ -18,6 +18,7 @@ jobs:
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven2-${{ hashFiles('**/pom.xml') }}
+
       - name: Docker login
         run: echo "${{ secrets.GCR_JSON_KEY_BASE64 }}" | base64 -d | docker login eu.gcr.io -u _json_key --password-stdin
 
@@ -25,7 +26,7 @@ jobs:
         run: mvn license:check
 
       - name: Build and Test
-        run: mvn clean verify
+        run: mvn -B clean verify
 
       - uses: codecov/codecov-action@v1
         with:
