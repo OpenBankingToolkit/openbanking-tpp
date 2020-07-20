@@ -1,11 +1,10 @@
 FROM node:10
 
 WORKDIR /src
-ADD ./projects/tpp/server/package.json ./projects/tpp/server/package-lock.json /src/
+
+ADD ./projects/tpp/server /src/
 
 RUN npm ci
-
-ADD ./projects/tpp/server /src
 
 ENV PORT 80
 RUN npm run build
