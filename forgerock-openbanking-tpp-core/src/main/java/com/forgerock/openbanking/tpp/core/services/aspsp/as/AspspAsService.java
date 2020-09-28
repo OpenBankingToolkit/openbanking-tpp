@@ -29,7 +29,7 @@ import com.forgerock.openbanking.tpp.config.AspspConfiguration;
 import com.forgerock.openbanking.tpp.exceptions.InvalidAuthorizationCodeException;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.JWTClaimsSet;
-import net.minidev.json.JSONObject;
+import com.nimbusds.jose.shaded.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,10 +63,15 @@ public class AspspAsService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AspspAsService.class);
 
-    @Autowired
     private CryptoApiClient cryptoApiClient;
-    @Autowired
+
     private RestTemplate restTemplate;
+
+    @Autowired
+    public AspspAsService(CryptoApiClient cryptoApiClient, RestTemplate restTemplate) {
+        this.cryptoApiClient = cryptoApiClient;
+        this.restTemplate = restTemplate;
+    }
 
     /**
      * Exchange a code into an access token
