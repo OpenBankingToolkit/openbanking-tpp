@@ -28,6 +28,7 @@ import com.forgerock.openbanking.tpp.core.configuration.DirectoryConfiguration;
 import com.forgerock.openbanking.tpp.core.model.directory.Aspsp;
 import com.forgerock.openbanking.tpp.core.model.directory.Organisation;
 import com.nimbusds.jose.jwk.JWK;
+import com.nimbusds.jose.util.JSONObjectUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -58,7 +59,7 @@ public class DirectoryService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         ParameterizedTypeReference<ApplicationIdentity> ptr = new ParameterizedTypeReference<ApplicationIdentity>() {};
-        HttpEntity<String> request = new HttpEntity<>(jwk.toJSONObject().toString(), headers);
+        HttpEntity<String> request = new HttpEntity<>(JSONObjectUtils.toJSONString(jwk.toJSONObject()), headers);
 
         ResponseEntity<ApplicationIdentity> entity = restTemplate.exchange(directoryConfiguration.authenticateEndpoint,
                 HttpMethod.POST, request, ptr);
