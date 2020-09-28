@@ -58,7 +58,7 @@ public class DirectoryService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         ParameterizedTypeReference<ApplicationIdentity> ptr = new ParameterizedTypeReference<ApplicationIdentity>() {};
-        HttpEntity<String> request = new HttpEntity<>(jwk.toJSONObject().toJSONString(), headers);
+        HttpEntity<String> request = new HttpEntity<>(jwk.toJSONObject().toString(), headers);
 
         ResponseEntity<ApplicationIdentity> entity = restTemplate.exchange(directoryConfiguration.authenticateEndpoint,
                 HttpMethod.POST, request, ptr);
