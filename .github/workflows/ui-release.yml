@@ -1,4 +1,4 @@
-name: Build-UI
+name: Build-UI Release
 
 on:
   release:
