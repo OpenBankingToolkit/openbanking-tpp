@@ -55,7 +55,6 @@
         <module>forgerock-openbanking-tpp-core</module>
         <module>forgerock-openbanking-tpp-account</module>
         <module>forgerock-openbanking-tpp-shop</module>
-        <module>forgerock-openbanking-ui</module>
     </modules>
 
     <dependencyManagement>
