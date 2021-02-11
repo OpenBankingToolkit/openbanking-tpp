@@ -1,18 +1,10 @@
 name: Build-UI
 
 on:
-  pull_request:
-    branches:
-      - master
-    paths:
-      - "forgerock-openbanking-ui/**"
-    push:
-      branches:
-        - master
-      paths:
-        - "forgerock-openbanking-ui/**"
-
+  release:
+    types: [ published ]
 env:
+  RELEASE_VERSION: ${{ github.event.release.tag_name }}
   GITHUB_SHA: ${{ github.sha }}
 
 jobs:
@@ -43,10 +35,11 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      - name: prepare version
+      - working-directory: ./forgerock-openbanking-ui
         id: version
         run: |
-          echo "::set-output name=BUILD_VERSION::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)-${GITHUB_SHA::7}"
+          export VERSION=${RELEASE_VERSION}-${GITHUB_SHA::7}
+          echo "::set-output name=BUILD_VERSION::$VERSION"
       - name: Download Artifact
         uses: actions/download-artifact@master
         with:
@@ -57,11 +50,12 @@ jobs:
       - name: Build TPP backend docker image
         working-directory: ./forgerock-openbanking-ui
         run: |
-          echo "Building docker image eu.gcr.io/openbanking-214714/obri/tpp-node:${{ steps.version.outputs.BUILD_VERSION }}"
+          export BUILD_VERSION=${{ steps.version.outputs.BUILD_VERSION }}
+          echo "Building docker image eu.gcr.io/openbanking-214714/obri/tpp-node:${BUILD_VERSION}"
           echo "${{ secrets.GCR_JSON_KEY_BASE64 }}" | base64 -d | docker login eu.gcr.io -u _json_key --password-stdin
-          docker build  --build-arg BUILD_VERSION=${{ steps.version.outputs.BUILD_VERSION }} -f projects/tpp/docker/Dockerfile-server -t eu.gcr.io/openbanking-214714/obri/tpp-node:latest -t eu.gcr.io/openbanking-214714/obri/tpp-node:${{ steps.version.outputs.BUILD_VERSION }} .
+          docker build  --build-arg BUILD_VERSION=$BUILD_VERSION -f projects/tpp/docker/Dockerfile-server -t eu.gcr.io/openbanking-214714/obri/tpp-node:latest -t eu.gcr.io/openbanking-214714/obri/tpp-node:$BUILD_VERSION .
           docker push eu.gcr.io/openbanking-214714/obri/tpp-node:latest
-          docker push eu.gcr.io/openbanking-214714/obri/tpp-node:${{ steps.version.outputs.BUILD_VERSION }}
+          docker push eu.gcr.io/openbanking-214714/obri/tpp-node:$BUILD_VERSION
   build_tpp_ui:
     name: Build TPP App
     runs-on: ubuntu-latest
@@ -69,10 +63,11 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      - name: prepare version
+      - working-directory: ./forgerock-openbanking-ui
         id: version
         run: |
-          echo "::set-output name=BUILD_VERSION::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)-${GITHUB_SHA::7}"
+          export VERSION=${RELEASE_VERSION}-${GITHUB_SHA::7}
+          echo "::set-output name=BUILD_VERSION::$VERSION"
       - name: Download Artifact
         uses: actions/download-artifact@master
         with:
@@ -83,23 +78,24 @@ jobs:
       - name: Build TPP APP docker image
         working-directory: ./forgerock-openbanking-ui
         run: |
-          echo "Building docker image eu.gcr.io/openbanking-214714/obri/tpp-ui:${{ steps.version.outputs.BUILD_VERSION }}"
+          export BUILD_VERSION=${{ steps.version.outputs.BUILD_VERSION }}
+          echo "Building docker image eu.gcr.io/openbanking-214714/obri/tpp-ui:${BUILD_VERSION}"
           echo "${{ secrets.GCR_JSON_KEY_BASE64 }}" | base64 -d | docker login eu.gcr.io -u _json_key --password-stdin
-          docker build --build-arg BUILD_VERSION=${{ steps.version.outputs.BUILD_VERSION }} -f projects/tpp/docker/Dockerfile -t eu.gcr.io/openbanking-214714/obri/tpp-ui:latest -t eu.gcr.io/openbanking-214714/obri/tpp-ui:${{ steps.version.outputs.BUILD_VERSION }} .
+          docker build --build-arg BUILD_VERSION=$BUILD_VERSION -f projects/tpp/docker/Dockerfile -t eu.gcr.io/openbanking-214714/obri/tpp-ui:latest -t eu.gcr.io/openbanking-214714/obri/tpp-ui:$BUILD_VERSION .
           docker push eu.gcr.io/openbanking-214714/obri/tpp-ui:latest
-          docker push eu.gcr.io/openbanking-214714/obri/tpp-ui:${{ steps.version.outputs.BUILD_VERSION }}
+          docker push eu.gcr.io/openbanking-214714/obri/tpp-ui:$BUILD_VERSION
   update_ob_deploy:
     name: Update ob-deploy
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
     needs: [build_tpp_ui, build_tpp_backend]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      - name: prepare version
+      - working-directory: ./forgerock-openbanking-ui
         id: version
         run: |
-          echo "::set-output name=BUILD_VERSION::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)-${GITHUB_SHA::7}"
+          export VERSION=${RELEASE_VERSION}-${GITHUB_SHA::7}
+          echo "::set-output name=BUILD_VERSION::$VERSION"
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
@@ -109,11 +105,11 @@ jobs:
       - name: Commit ob-deploy version update
         working-directory: ./ob-deploy
         run: |
-          jq -M  '[ .[] | if ((.service == "tpp-ui" or .service == "tpp-node") and (.helmReference  | contains("obri-helm-charts/ui-template"))) then .version |= "${{ steps.version.outputs.BUILD_VERSION }}" else . end ]' client_releases/master-dev/releases.json > client_releases/master-dev/releases.json.tmp
-          mv client_releases/master-dev/releases.json.tmp client_releases/master-dev/releases.json
+          jq -M  '[ .[] | if ((.service == "tpp-ui" or .service == "tpp-node") and (.helmReference  | contains("obri-helm-charts/ui-template"))) then .version |= "${{ steps.version.outputs.BUILD_VERSION }}" else . end ]' releases-published.json > releases-published.json.tmp
+          mv releases-published.json.tmp releases-published.json
           git config --global user.email "codefresh@codefresh.io"
           git config --global user.name "Codefresh"
-          git add client_releases/master-dev/releases.json
+          git add releases-published.json
           git commit --allow-empty -m "Bumping TPP UI & Backend version ${{ steps.version.outputs.BUILD_VERSION }}"
       - name: Temporarily disable "include administrators" protection
         uses: benjefferies/branch-protection-bot@master
