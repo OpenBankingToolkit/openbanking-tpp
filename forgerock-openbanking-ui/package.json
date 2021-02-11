@@ -1,6 +1,5 @@
 {
   "name": "forgerock-openbanking-ui",
-  "project_version": "3.1.6-smiths-rc2",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
