@@ -6,11 +6,9 @@ on:
       - master
     paths:
       - "forgerock-openbanking-ui/**"
-    push:
-      branches:
-        - master
-      paths:
-        - "forgerock-openbanking-ui/**"
+  push:
+    branches:
+      - master
 
 env:
   GITHUB_SHA: ${{ github.sha }}
