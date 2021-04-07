@@ -137,7 +137,7 @@ public class PISPService {
                         .buildingNumber(buildingNumber)
                         .postCode(postCode)
                         .townName(townName)
-                        .countrySubDivision(Arrays.asList(countySubDivision))
+                        .countrySubDivision(countySubDivision)
                         .country(country)
                 );
     }
