@@ -1,0 +1,37 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: com.forgerock.openbanking:forgerock-openbanking-starter-parent
+    versions:
+    - 1.0.86
+    - 1.1.87
+    - 1.1.88
+  - dependency-name: com.forgerock.openbanking.clients:forgerock-openbanking-jwkms-client
+    versions:
+    - 1.1.0
+  - dependency-name: com.forgerock.openbanking.clients:forgerock-openbanking-analytics-client
+    versions:
+    - 1.1.0
+  - dependency-name: com.forgerock.openbanking:forgerock-openbanking-ssl
+    versions:
+    - 1.0.87
+    - 1.0.88
+    - 1.0.89
+    - 1.1.0
+  - dependency-name: com.forgerock.openbanking:forgerock-openbanking-upgrade
+    versions:
+    - 1.0.87
+    - 1.0.88
+    - 1.0.89
+    - 1.1.0
+  - dependency-name: com.forgerock.openbanking:forgerock-openbanking-model
+    versions:
+    - 1.0.87
+    - 1.0.88
+    - 1.0.89
+    - 1.1.0
