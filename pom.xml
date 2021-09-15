@@ -27,7 +27,7 @@
     <name>ForgeRock OpenBanking Reference Implementation - TPP</name>
     <groupId>com.forgerock.openbanking.tpp</groupId>
     <artifactId>forgerock-openbanking-reference-implementation-tpp</artifactId>
-    <version>1.1.7-SNAPSHOT</version>
+    <version>1.1.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
