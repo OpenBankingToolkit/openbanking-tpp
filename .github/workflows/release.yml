@@ -12,9 +12,11 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Set up forgerock maven repository
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with: # running setup-java and overwrites the settings.xml
           java-version: '11'
+          distribution: 'zulu'
+          cache: 'maven'
           architecture: x64
           server-id: maven.forgerock.org-community # Value of the distributionManagement/repository/id field of the pom.xml
           server-username: MAVEN_USERNAME # env variable for username in deploy
@@ -22,9 +24,11 @@ jobs:
 
       - name: Set up snapshot forgerock maven repository
         if: contains(github.ref, 'SNAPSHOT')
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with: # running setup-java and overwrites the settings.xml
           java-version: '11'
+          distribution: 'zulu'
+          cache: 'maven'
           architecture: x64
           server-id: maven.forgerock.org-community-snapshots # Value of the distributionManagement/repository/id field of the pom.xml
           server-username: MAVEN_USERNAME # env variable for username in deploy
