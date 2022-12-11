@@ -13,7 +13,7 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "fs-extra": "^9.0.0",
     "node-fetch": "^2.6.0",
     "qs": "^6.8.0"
