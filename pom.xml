@@ -44,10 +44,10 @@
     <url>http://www.forgerock.org</url>
 
     <properties>
-        <ob-common.version>1.5.1</ob-common.version>
-        <ob-clients.version>1.5.1</ob-clients.version>
-        <ob-jwkms.version>1.5.1</ob-jwkms.version>
-        <ob-auth.version>1.5.1</ob-auth.version>
+        <ob-common.version>1.5.2</ob-common.version>
+        <ob-clients.version>1.5.2</ob-clients.version>
+        <ob-jwkms.version>1.5.2</ob-jwkms.version>
+        <ob-auth.version>1.5.2</ob-auth.version>
     </properties>
 
     <modules>
